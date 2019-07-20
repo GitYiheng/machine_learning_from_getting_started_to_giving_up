@@ -47,12 +47,8 @@ from gym_foo.envs.foo_env import FooEnv
 `gym-foo/gym_foo/envs/foo_env.py`
 ```python
 import gym
-from gym import error, spaces, utils
-from gym.utils import seeding
 
 class FooEnv(gym.Env):
-    metadata = {'render.modes': ['human']}
-    
     def __init__(self):
         pass
     
