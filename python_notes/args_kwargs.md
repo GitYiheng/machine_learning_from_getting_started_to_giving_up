@@ -4,7 +4,7 @@
 
 # *arg Example
 
-*args sends a non-keyworded variable length argument list to the function
+*args sends a non-keyworded variable length argument tuple to the function
 
 ```python
 def test_args(f_arg, *args):
@@ -20,7 +20,7 @@ test_args(*args)
 
 # **kwargs Example
 
-**kwargs sends keyworded variable length of arguments to a function
+**kwargs sends keyworded variable length of argument dictionary to a function
 
 ```python
 def test_kwargs(**kwargs):
