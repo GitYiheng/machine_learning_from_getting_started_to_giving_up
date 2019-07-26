@@ -20,3 +20,9 @@ In a similar way, the next 7 elements in qpos describe the position and orientat
 
     qpos[13]~qpos[16]: body orientation (in quaternion)
 
+# Quaternion
+
+Quaternion describes 3d orientation using 4 numbers.
+
+    a + b __i__ + c **j** + d **k**
+
