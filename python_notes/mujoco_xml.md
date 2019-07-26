@@ -24,5 +24,7 @@ In a similar way, the next 7 elements in qpos describe the position and orientat
 
 Quaternion describes 3d orientation using 4 numbers.
 
-    a + b __i__ + c **j** + d **k**
+a + b**i** + c**j** +d**k**
+
+a describes the distance, while b, c, and d describe the orientation.
 
