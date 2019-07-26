@@ -4,21 +4,17 @@ You can build models for MuJoCo in .xml format.
 
 # qpos
 
-The first 3 elements in qpos describe the position of 'worldbody'
+The first 3 elements in qpos describe the position
 
-    qpos[0]~qpos[2]: world position
+    qpos[0]~qpos[2]: body position
 
-The following 7 elements in qpos describe the position and orientation of that 'body'
+The next 4 elements in qpos describe the orientation
 
-    qpos[3]~qpos[5]: body position
+    qpos[3]~qpos[6]: body orientation (in quaternion)
 
-    qpos[6]~qpos[9]: body orientation (in quaternion)
+The following elements correspond to the rest joints define in sequence
 
-In a similar way, the next 7 elements in qpos describe the position and orientation of the next 'body'
-
-    qpos[10]~qpos[12]: body position
-
-    qpos[13]~qpos[16]: body orientation (in quaternion)
+    qpos[n]: joint n
 
 # Quaternion
 
