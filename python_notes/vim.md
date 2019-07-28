@@ -26,3 +26,15 @@ To enter line mode, type `:` while in normal mode.
 After a command completes in line mode you are returned to normal mode.
 
 You can also leave command mode by pressing Escape.
+
+# Navigation
+
+`h` left
+
+`l` right
+
+`j` down
+
+`k` up
+
+# Deleting
