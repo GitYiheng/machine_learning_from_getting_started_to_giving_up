@@ -1,3 +1,23 @@
+# Setting Up SSH Keys
+
+Create the RSA Key Pair
+
+```
+ssh-keygen
+```
+
+Copy the Public Key to Ubuntu Server
+
+```
+ssh-copy-id username@remote_host
+```
+
+Copying Public Key Manually
+
+```
+cat ~/.ssh/id_rsa.pub
+```
+
 # Logging in as Root
 
 ```
