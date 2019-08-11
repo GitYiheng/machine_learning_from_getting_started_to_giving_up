@@ -6,14 +6,14 @@ ssh root@server_ip
 
 # Creating a New User
 
-```console
-root@server_ip adduser user_name
+```
+adduser user_name
 ```
 
 # Granting Administrative Privileges
 
-```console
-root@server_ip usermod -aG sudo user_name
+```
+usermod -aG sudo user_name
 ```
 
 # Setting Up SSH Keys
