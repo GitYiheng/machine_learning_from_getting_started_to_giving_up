@@ -2,7 +2,7 @@
 
 The sigmoid function is used for the two-class case, whereas the softmax function is used for the multiclass case.
 
-Sigmoid is equivalent to softmax in the two-class case (binary classification), however in case of multinomial classification, sigmoid allows to deal with non-exclusive labels (multi-labels), while softmax deals with exclusive classes.
+Sigmoid is equivalent to softmax in the two-class case (binary classification), however in case of multinomial classification, sigmoid allows to deal with non-exclusive labels (multi-labels), while softmax deals with exclusive classes (one-hot encoded).
 
 In the two-class case, the predicted probablies are as follows, using the sigmoid function:
 
