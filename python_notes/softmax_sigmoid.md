@@ -2,7 +2,7 @@
 
 The sigmoid function is used for the two-class case, whereas the softmax function is used for the multiclass case.
 
-Sigmoid is equivalent to softmax in the two-class case (binary classification), however in case of multinomial classification, sigmoid allows to deal with non-exclusive labels (multi-labels), while softmax deals with exclusive classes (one-hot encoded).
+Sigmoid is equivalent to softmax in the two-class case (binary classification), however in case of multinomial classification, sigmoid allows to deal with non-exclusive labels (multi-labels), while softmax deals with exclusive classes.
 
 In the two-class case, the predicted probablies are as follows, using the sigmoid function:
 
@@ -19,3 +19,17 @@ In the multiclass case, with K classes, the predicted probabilities are as follo
 # What is a Logit
 
 A logit (also called a score) is a raw unscaled value associated with a class, before computing the probability. In terms of neural network architecture, this means that a logit is an output of a dense (fully-connected) layer.
+
+# In TensorFlow
+
+- Sigmoid function: It solves N binary classifications at once. The labels must be one-hot encoded.
+
+  `tf.nn.sigmoid_cross_entropy_with_logits`
+
+- Softmax function: It should be used for multinomial mutually exclusive classification. The labels must be one-hot encoded.
+
+  `tf.nn.softmax_cross_entropy_with_logits_v2`
+
+- Sparse function: The classes are specified as integers (class index), not one-hot vectors.
+
+  `tf.nn.sparse_softmax_cross_entropy_with_logits`
