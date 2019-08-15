@@ -211,4 +211,90 @@ with tf.Session() as sess:
 
 Notice that in `sess.run()` we provided the TensorFlow name of the tensors `'A:0'` and `'B:0'` instead of `a` and `b`.
 
+# Save and Restore Variables of a Sample Linear Model
 
+## Load MNIST data
+
+```python
+# Data Dimensions
+img_h = img_w = 28              # MNIST images are 28x28
+img_size_flat = img_h * img_w   # 28x28=784, the total number of pixels
+n_classes = 10                  # Number of classes, one class per digit
+
+# Load MNIST data
+from tensorflow.examples.tutorials.mnist import input_data
+data = input_data.read_data_sets("MNIST/", one_hot=True)
+```
+
+```python
+# Hyper-parameters
+learning_rate = 0.001   # The optimization initial learning rate
+batch_size = 100        # Training batch size
+num_steps = 100         # Total number of training steps
+```
+
+```python
+x = tf.placeholder(tf.float32, shape=[None, img_size_flat], name='X')
+y = tf.placeholder(tf.float32, shape=[None, n_classes], name='Y')
+
+w = tf.get_variable('W',
+                    dtype=tf.float32,
+                    shape=[img_size_flat, n_classes],
+                    initializer=tf.truncated_normal_initializer(stddev=0.01))
+b = tf.get_variable('b',
+                    dtype=tf.float32,
+                    initializer=tf.constant(0., shape=[n_classes], dtype=tf.float32))
+
+output_logits = tf.matmul(x, W) + b
+y_pred = tf.nn.softmax(output_logits)
+```
+
+```python
+# Define the loss function, optimizer, and accuracy
+loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=y, logits=output_logits), name='loss')
+optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate, name='Adam-op').minimize(loss)
+correct_prediction = tf.equal(tf.argmax(output_logits, 1), tf.argmax(y, 1), name='correct_pred')
+accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32), name='accuracy')
+```
+
+```python
+# create saver object
+saver = tf.train.Saver()
+```
+
+## Run the model and save the variables
+
+```python
+# run the session
+sess = tf.Session()
+sess.run(tf.global_variables_initializer())
+for i in range(num_steps):
+    # Get a batch of training examples and their corresponding labels.
+    x_batch, y_true_batch = data.train.next_batch(batch_size)
+
+    # Put the batch into a dict to be fed into the placeholders
+    feed_dict_train = {x: x_batch, y: y_true_batch}
+    sess.run(optimizer, feed_dict=feed_dict_train)
+    # save the variable in the disk
+    saved_path = saver.save(sess, './saved_variable')
+    print('model saved in {}'.format(saved_path))
+```
+
+## Restore the model and pull out the trained variables
+
+```python
+# delete the current graph
+tf.reset_default_graph()
+
+# import the graph from the file
+imported_graph = tf.train.import_meta_graph('saved_variable.meta')
+
+# run the session
+with tf.Session() as sess:
+    # restore the saved vairable
+    imported_graph.restore(sess, './saved_variable')
+    # print the loaded variable
+    weight, bias = sess.run(['w:0','b:0'])
+    print('W = ', weight)
+    print('b = ', bias)
+```
