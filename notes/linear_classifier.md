@@ -266,7 +266,7 @@ print("Test loss: {0:.2f}, test accuracy: {1:.01%}".format(loss_test, acc_test))
 print('---------------------------------------------------------')
 ```
 
-## plot some results
+## Plot some results
 
 Another way to evaluate the model is to visualize the input and the model results and compare them with the true label of the input. This is advantages in numerous ways. For example, even if you get a decent accuracy, when you plot the results, you might see all the samples have been classified in one class. Another example is when you plot, you can have a rough idea on which examples your model failed. Let's define the helper functions to plot some correct and missclassified examples.
 
