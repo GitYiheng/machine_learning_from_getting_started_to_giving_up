@@ -112,3 +112,12 @@ You can also leave command mode by pressing Escape.
 `"Ayw` copy one word into register a (append)
 
 `"ap` paste text from register a after the cursor
+
+# Vimrc
+
+- rc = run commands
+- System-wide vimrc and personal vimrc
+- Unix/Linux/Mac: ~/.vimrc
+- Windows: $HOME/_vimrc
+- Each line is executed as a command
+
