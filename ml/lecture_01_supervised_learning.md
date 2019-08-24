@@ -103,42 +103,26 @@ You have to be very careful when you split the data in Train, Validation, Test. 
     
     The test error (or testing loss) approximates the true generalization error/loss.
 
+## Putting Everything Together:
 
+We train our classifier by minimizing the training loss:
 
+**Learning**: <a href="https://www.codecogs.com/eqnedit.php?latex=h^{\ast}(\cdot)=\operatorname*{argmin}_{h(\cdot)&space;\in&space;\mathcal{H}}&space;\frac{1}{\vert&space;D_{TR}&space;\vert}&space;\sum_{(\mathbf{x},&space;y)&space;\in&space;D_{TR}}&space;\ell(\mathbf{x},&space;y&space;\vert&space;h(\cdot))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h^{\ast}(\cdot)=\operatorname*{argmin}_{h(\cdot)&space;\in&space;\mathcal{H}}&space;\frac{1}{\vert&space;D_{TR}&space;\vert}&space;\sum_{(\mathbf{x},&space;y)&space;\in&space;D_{TR}}&space;\ell(\mathbf{x},&space;y&space;\vert&space;h(\cdot))" title="h^{\ast}(\cdot)=\operatorname*{argmin}_{h(\cdot) \in \mathcal{H}} \frac{1}{\vert D_{TR} \vert} \sum_{(\mathbf{x}, y) \in D_{TR}} \ell(\mathbf{x}, y \vert h(\cdot))" /></a>,
 
+where <a href="https://www.codecogs.com/eqnedit.php?latex=\mathcal{H}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathcal{H}" title="\mathcal{H}" /></a> is the hypothetical class (i.e., the set of all possible classifier <a href="https://www.codecogs.com/eqnedit.php?latex=h(\cdot)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h(\cdot)" title="h(\cdot)" /></a>). In other words, we are trying to find a hypothesis <a href="https://www.codecogs.com/eqnedit.php?latex=h" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h" title="h" /></a> which would have performed well on the past/known data.
 
+We evaluate our classifier on the testing loss:
 
+**Evaluation**: <a href="https://www.codecogs.com/eqnedit.php?latex=\epsilon_{TE}&space;=&space;\frac{1}{\vert&space;D_{TE}&space;\vert}&space;\sum_{(\mathbf{x},&space;y)&space;\in&space;D_{TE}}&space;\ell&space;(\mathbf{x},&space;y&space;\vert&space;h^{\ast}(\cdot))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\epsilon_{TE}&space;=&space;\frac{1}{\vert&space;D_{TE}&space;\vert}&space;\sum_{(\mathbf{x},&space;y)&space;\in&space;D_{TE}}&space;\ell&space;(\mathbf{x},&space;y&space;\vert&space;h^{\ast}(\cdot))" title="\epsilon_{TE} = \frac{1}{\vert D_{TE} \vert} \sum_{(\mathbf{x}, y) \in D_{TE}} \ell (\mathbf{x}, y \vert h^{\ast}(\cdot))" /></a>.
 
+If the samples are drawn i.i.d. from the same distribution <a href="https://www.codecogs.com/eqnedit.php?latex=\mathcal{P}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathcal{P}" title="\mathcal{P}" /></a>, then the testing loss is an unbiased estimator of the true **generalization loss**:
 
+**Generalization**: <a href="https://www.codecogs.com/eqnedit.php?latex=\epsilon&space;=&space;\mathbb{E}_{(\mathbf{x},&space;y)&space;\sim&space;\mathcal{P}}&space;[\ell&space;(\mathbf{x},&space;y&space;\vert&space;h^{\ast}&space;(\cdot))]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\epsilon&space;=&space;\mathbb{E}_{(\mathbf{x},&space;y)&space;\sim&space;\mathcal{P}}&space;[\ell&space;(\mathbf{x},&space;y&space;\vert&space;h^{\ast}&space;(\cdot))]" title="\epsilon = \mathbb{E}_{(\mathbf{x}, y) \sim \mathcal{P}} [\ell (\mathbf{x}, y \vert h^{\ast} (\cdot))]" /></a>.
 
+*Quiz*: Why does <a href="https://www.codecogs.com/eqnedit.php?latex=\epsilon_{TE}&space;\rightarrow&space;\epsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\epsilon_{TE}&space;\rightarrow&space;\epsilon" title="\epsilon_{TE} \rightarrow \epsilon" /></a> as <a href="https://www.codecogs.com/eqnedit.php?latex=\vert&space;D_{TE}&space;\vert&space;\rightarrow&space;&plus;&space;\infty" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\vert&space;D_{TE}&space;\vert&space;\rightarrow&space;&plus;&space;\infty" title="\vert D_{TE} \vert \rightarrow + \infty" /></a>? This is due to the weak law of large numbers, which says that the empirical average of data drawn from a distribution converges to its mean.
 
+*No free lunch*. Every ML algorithm has to make assumptions on which hypothesis class <a href="https://www.codecogs.com/eqnedit.php?latex=\mathcal{H}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathcal{H}" title="\mathcal{H}" /></a> should you choose? This choice depends on the data, and encodes *your assumptions* about the data set/distribution <a href="https://www.codecogs.com/eqnedit.php?latex=\mathcal{P}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathcal{P}" title="\mathcal{P}" /></a>. Clearly, there's no one perfect <a href="https://www.codecogs.com/eqnedit.php?latex=\mathcal{H}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathcal{H}" title="\mathcal{H}" /></a> for all problems.
 
+*Example*. Assume that <a href="https://www.codecogs.com/eqnedit.php?latex=(\mathbf{x}_1,&space;y_1)&space;=&space;(1,&space;1)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(\mathbf{x}_1,&space;y_1)&space;=&space;(1,&space;1)" title="(\mathbf{x}_1, y_1) = (1, 1)" /></a>, <a href="https://www.codecogs.com/eqnedit.php?latex=(\mathbf{x}_2,&space;y_2)&space;=&space;(2,&space;2)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(\mathbf{x}_2,&space;y_2)&space;=&space;(2,&space;2)" title="(\mathbf{x}_2, y_2) = (2, 2)" /></a>, <a href="https://www.codecogs.com/eqnedit.php?latex=(\mathbf{x}_3,&space;y_3)&space;=&space;(3,&space;3)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(\mathbf{x}_3,&space;y_3)&space;=&space;(3,&space;3)" title="(\mathbf{x}_3, y_3) = (3, 3)" /></a>, <a href="https://www.codecogs.com/eqnedit.php?latex=(\mathbf{x}_4,&space;y_4)&space;=&space;(4,&space;4)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(\mathbf{x}_4,&space;y_4)&space;=&space;(4,&space;4)" title="(\mathbf{x}_4, y_4) = (4, 4)" /></a>, and <a href="https://www.codecogs.com/eqnedit.php?latex=(\mathbf{x}_5,&space;y_5)&space;=&space;(5,&space;5)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(\mathbf{x}_5,&space;y_5)&space;=&space;(5,&space;5)" title="(\mathbf{x}_5, y_5) = (5, 5)" /></a>.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Question: what is the value of <a href="https://www.codecogs.com/eqnedit.php?latex=y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y" title="y" /></a> if <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{x}=2.5" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{x}=2.5" title="\mathbf{x}=2.5" /></a>? Well, it is utterly *impossible* to know the answer without assumptions. The most common assumption of ML algorithms is that the function to be approximated is locally smooth.
