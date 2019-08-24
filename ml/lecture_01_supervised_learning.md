@@ -96,9 +96,11 @@ To resolve the overfitting issue, we usually *split* <a href="https://www.codeco
 You have to be very careful when you split the data in Train, Validation, Test. The test set must simulate a real test scenario, i.e. you want to simulate the setting that you will encounter in real life. For example, if you want to train an email spam filter, you train a system on past data to predict if future email is spam. Here it is important to split train / test temporally -- so that you strictly predict the future from the past. If there is no such thing as a temporal component, it is often best to split uniformly at random. Definitely never split alphabetically, or by feature values.
 
 - *By time*, if the data is temporally collected.
+    
     In general, if the data has a temporal component, we *must* split it by time.
 
 - *Uniformly at random*, if (and, in general, only if) the data is *i.i.d.*.
+    
     The test error (or testing loss) approximates the true generalization error/loss.
 
 
