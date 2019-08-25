@@ -29,6 +29,26 @@ Using this, we can simplify the above formulation of <a href="https://www.codeco
 
 where 'classified correctly' means that <a href="https://www.codecogs.com/eqnedit.php?latex=x_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?x_i" title="x_i" /></a> is on the correct side of the hyperplane defined by <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{w}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{w}" title="\mathbf{w}" /></a>. Also, note that the left side depends on <a href="https://www.codecogs.com/eqnedit.php?latex=y_i&space;\in&space;\{&space;-1,&space;&plus;1&space;\}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_i&space;\in&space;\{&space;-1,&space;&plus;1&space;\}" title="y_i \in \{ -1, +1 \}" /></a> (it wouldn't work if, for example <a href="https://www.codecogs.com/eqnedit.php?latex=y_i&space;\in&space;\{&space;0,&space;&plus;1&space;\}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_i&space;\in&space;\{&space;0,&space;&plus;1&space;\}" title="y_i \in \{ 0, +1 \}" /></a>).
 
+## Perceptron Algorithm
+
+Now that we know what the <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{w}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{w}" title="\mathbf{w}" /></a> is supposed to do (defining a hyperplane that separates the data), let's look at how we can get such <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{w}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{w}" title="\mathbf{w}" /></a>.
+
+### Perceptron Algorithm
+
+Initialize <a href="https://www.codecogs.com/eqnedit.php?latex=\overrightarrow{w}&space;=&space;\overrightarrow{0}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\overrightarrow{w}&space;=&space;\overrightarrow{0}" title="\overrightarrow{w} = \overrightarrow{0}" /></a>
+<br /> **while** TRUE **do**
+<br /> &ensp; <a href="https://www.codecogs.com/eqnedit.php?latex=m=0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?m=0" title="m=0" /></a>
+<br /> &ensp; **for** <a href="https://www.codecogs.com/eqnedit.php?latex=(x_i,&space;y_i)&space;\in&space;D" target="_blank"><img src="https://latex.codecogs.com/gif.latex?(x_i,&space;y_i)&space;\in&space;D" title="(x_i, y_i) \in D" /></a> **do**
+<br /> &ensp; &ensp; **if** <a href="https://www.codecogs.com/eqnedit.php?latex=y_i&space;(\overrightarrow{w}^{\top}&space;\cdot&space;\overrightarrow{x_{i}})&space;\leq&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_i&space;(\overrightarrow{w}^{\top}&space;\cdot&space;\overrightarrow{x_{i}})&space;\leq&space;0" title="y_i (\overrightarrow{w}^{\top} \cdot \overrightarrow{x_{i}}) \leq 0" /></a> **then**
+<br /> &ensp; &ensp; &ensp; <a href="https://www.codecogs.com/eqnedit.php?latex=\overrightarrow{w}&space;\leftarrow&space;\overrightarrow{w}&space;&plus;&space;y&space;\overrightarrow{x}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\overrightarrow{w}&space;\leftarrow&space;\overrightarrow{w}&space;&plus;&space;y&space;\overrightarrow{x}" title="\overrightarrow{w} \leftarrow \overrightarrow{w} + y \overrightarrow{x}" /></a>
+<br /> &ensp; &ensp; &ensp; <a href="https://www.codecogs.com/eqnedit.php?latex=m&space;\leftarrow&space;m&space;&plus;&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?m&space;\leftarrow&space;m&space;&plus;&space;1" title="m \leftarrow m + 1" /></a>
+<br /> &ensp; &ensp; **end if**
+<br /> &ensp; **end for**
+<br /> &ensp; **if** <a href="https://www.codecogs.com/eqnedit.php?latex=m&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?m&space;=&space;0" title="m = 0" /></a> **then**
+<br /> &ensp; &ensp; <a href="https://www.codecogs.com/eqnedit.php?latex=break" target="_blank"><img src="https://latex.codecogs.com/gif.latex?break" title="break" /></a>
+<br /> &ensp; **end if**
+<br /> **end while**
+
 
 
 
