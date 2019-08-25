@@ -61,15 +61,26 @@ where the inequality follows from <a href="https://www.codecogs.com/eqnedit.php?
 
 *Bad news*: We are cursed!!
 
+## Curse of Dimensionality
 
+### Distances between Points
 
+The k-NN classifier makes the assumption that similar points share similar labels. Unfortunately, in high dimensional spaces, points that are drawn from a probability distribution, tend to never be close together. We can illustrate this on a simple example. We will draw points uniformly at random within the unit cube and we will investigate how much space the <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a> nearest neighbors of a test point inside this cube will take up.
 
+Formally, imagine the unit cube <a href="https://www.codecogs.com/eqnedit.php?latex=[0,&space;1]^d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?[0,&space;1]^d" title="[0, 1]^d" /></a>. All training data is sampled *uniformly* within this cube, i.e. <a href="https://www.codecogs.com/eqnedit.php?latex=\forall&space;i,&space;\enspace&space;x_i&space;\in&space;[0,&space;1]^d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\forall&space;i,&space;\enspace&space;x_i&space;\in&space;[0,&space;1]^d" title="\forall i, \enspace x_i \in [0, 1]^d" /></a>, and we are considering the <a href="https://www.codecogs.com/eqnedit.php?latex=k=10" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k=10" title="k=10" /></a> nearest neighbors of such a test point.
 
+Let <a href="https://www.codecogs.com/eqnedit.php?latex=\ell" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\ell" title="\ell" /></a> be the edge length of the smallest hyper-cube that contains all <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>-nearest neighbor of a test point. Then <a href="https://www.codecogs.com/eqnedit.php?latex=\ell^{d}&space;\approx&space;\frac{k}{n}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\ell^{d}&space;\approx&space;\frac{k}{n}" title="\ell^{d} \approx \frac{k}{n}" /></a> and <a href="https://www.codecogs.com/eqnedit.php?latex=\ell&space;\approx&space;(\frac{k}{n})^{1/d}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\ell&space;\approx&space;(\frac{k}{n})^{1/d}" title="\ell \approx (\frac{k}{n})^{1/d}" /></a>. If <a href="https://www.codecogs.com/eqnedit.php?latex=n&space;=&space;1000" target="_blank"><img src="https://latex.codecogs.com/gif.latex?n&space;=&space;1000" title="n = 1000" /></a>, how big is <a href="https://www.codecogs.com/eqnedit.php?latex=\ell" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\ell" title="\ell" /></a>?
 
+| d | l |
+| :-: | :-: |
+| 2 | 0.1 |
+| 10 | 0.63 |
+| 100 | 0.955 |
+| 1000 | 0.9954 |
 
+So as <a href="https://www.codecogs.com/eqnedit.php?latex=d&space;\gg&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?d&space;\gg&space;0" title="d \gg 0" /></a> almost the entire space is needed to find the 10-NN. This breaks down the <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>-NN assumptions, because the <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>-NN are not particularly closer (and therefore more similar) than any other data points in the training set. Why would the test point share the label with those <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>-nearest neighbors, if they are not actually similar to it?
 
-
-
+One might think that one rescue could be to increase the number of training samples, <a href="https://www.codecogs.com/eqnedit.php?latex=n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?n" title="n" /></a>, until the nearest neighbors are truly close to the test point. How many data points would we need such that <a href="https://www.codecogs.com/eqnedit.php?latex=\ell" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\ell" title="\ell" /></a> becomes truly small? Fix <a href="https://www.codecogs.com/eqnedit.php?latex=\ell&space;=&space;\frac{1}{10}&space;=&space;0.1&space;\Rightarrow&space;n&space;=&space;\frac{k}{\ell^d}&space;=&space;k&space;\cdot&space;10^d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\ell&space;=&space;\frac{1}{10}&space;=&space;0.1&space;\Rightarrow&space;n&space;=&space;\frac{k}{\ell^d}&space;=&space;k&space;\cdot&space;10^d" title="\ell = \frac{1}{10} = 0.1 \Rightarrow n = \frac{k}{\ell^d} = k \cdot 10^d" /></a>, which grows exponentially! For <a href="https://www.codecogs.com/eqnedit.php?latex=d&space;>&space;100" target="_blank"><img src="https://latex.codecogs.com/gif.latex?d&space;>&space;100" title="d > 100" /></a> we would need for more data points than there are electrons in the universe...
 
 
 
