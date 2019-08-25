@@ -82,49 +82,16 @@ So as <a href="https://www.codecogs.com/eqnedit.php?latex=d&space;\gg&space;0" t
 
 One might think that one rescue could be to increase the number of training samples, <a href="https://www.codecogs.com/eqnedit.php?latex=n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?n" title="n" /></a>, until the nearest neighbors are truly close to the test point. How many data points would we need such that <a href="https://www.codecogs.com/eqnedit.php?latex=\ell" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\ell" title="\ell" /></a> becomes truly small? Fix <a href="https://www.codecogs.com/eqnedit.php?latex=\ell&space;=&space;\frac{1}{10}&space;=&space;0.1&space;\Rightarrow&space;n&space;=&space;\frac{k}{\ell^d}&space;=&space;k&space;\cdot&space;10^d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\ell&space;=&space;\frac{1}{10}&space;=&space;0.1&space;\Rightarrow&space;n&space;=&space;\frac{k}{\ell^d}&space;=&space;k&space;\cdot&space;10^d" title="\ell = \frac{1}{10} = 0.1 \Rightarrow n = \frac{k}{\ell^d} = k \cdot 10^d" /></a>, which grows exponentially! For <a href="https://www.codecogs.com/eqnedit.php?latex=d&space;>&space;100" target="_blank"><img src="https://latex.codecogs.com/gif.latex?d&space;>&space;100" title="d > 100" /></a> we would need for more data points than there are electrons in the universe...
 
+### Distances to Hyperplanes
 
+So the distance between two randomly drawn data points increases drastically with their dimensionality. How about the distance to a hyperplane? There are two blue points and a red hyperplane. As long as <a href="https://www.codecogs.com/eqnedit.php?latex=d=2" target="_blank"><img src="https://latex.codecogs.com/gif.latex?d=2" title="d=2" /></a>, the distance between two points is <a href="https://www.codecogs.com/eqnedit.php?latex=\sqrt{\Delta&space;x^2&space;&plus;&space;\Delta&space;y^2}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sqrt{\Delta&space;x^2&space;&plus;&space;\Delta&space;y^2}" title="\sqrt{\Delta x^2 + \Delta y^2}" /></a>. When a third dimension is added, this extends to <a href="https://www.codecogs.com/eqnedit.php?latex=\sqrt{\Delta&space;x^2&space;&plus;&space;\Delta&space;y^2&space;&plus;&space;\Delta&space;z^2}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sqrt{\Delta&space;x^2&space;&plus;&space;\Delta&space;y^2&space;&plus;&space;\Delta&space;z^2}" title="\sqrt{\Delta x^2 + \Delta y^2 + \Delta z^2}" /></a>, which must be at least as large (and is probably larger). This confirms again that pairwise distances grow in high dimensions. On the other hand, the distance to the red hyperplane remains unchanged as the third dimension is added. The reason is that the normal of the hyper-plane is orthogonal to the new dimension. This is a crucial observation. In <a href="https://www.codecogs.com/eqnedit.php?latex=d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?d" title="d" /></a> dimensions, <a href="https://www.codecogs.com/eqnedit.php?latex=d-1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?d-1" title="d-1" /></a> dimensions will be orthogonal to the normal of any given hyper-plane. Movement in those dimensions cannot increase or decrease the distance to the hyperplane -- the points just shift around and remain at the same distance. As distances between pairwise points become very large in high dimensional spaces, distances to hyperplanes become comparatively tiny. For machine learning algorithms, this is highly relevant. Many classifiers (e.g. the *Perceptron* or *SVMs*) place hyper-planes between concentrations of different classes. One consequence of the curse of dimensionality is that most data points tend to be very close to these hyperplanes and it is often possible to perturb input slightly (and often imperceptibly) in order to change a classification outcome. This practice has recently become known as the creation of *adversarial samples*, whose existents is often falsely attributed to the complexity of neural networks.
 
+## Data with Low Dimensional Structure
 
+However, not all is lost. Data may lie in low dimensional subspace or on sub-manifolds. Examples: natural images (digits, faces). Here, the true dimensionality of the data can be much lower than its ambient space. Considering a data set sampled from a 2-dimensional manifold (i.e. a surface in space), that is embedded within 3d. Human faces are a typical example of an intrinsically low dimensional data set. Although an image of a face may require 18M pixels, a person may be able to describe this person with less than 50 attributes (e.g. male/female, blond/dark hair, ...) along which faces vary.
 
+## K-NN Summary
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>-NN is a simple and effective classifier if distances reliably reflect a semantically meaningful notion of the dissimilarity. (It becomes truly competitive through metric learning)
+- As <a href="https://www.codecogs.com/eqnedit.php?latex=n&space;\rightarrow&space;\infty" target="_blank"><img src="https://latex.codecogs.com/gif.latex?n&space;\rightarrow&space;\infty" title="n \rightarrow \infty" /></a>, <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>-NN becomes provably very accurate, but also very slow.
+- As <a href="https://www.codecogs.com/eqnedit.php?latex=d&space;\gg&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?d&space;\gg&space;0" title="d \gg 0" /></a>, points drawn from a probability distribution stop being similar to each other, and the <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>-NN assumption breaks down.
