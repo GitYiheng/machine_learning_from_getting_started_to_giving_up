@@ -150,69 +150,8 @@ Simplying this further leads to
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\begin{align*}&space;&&space;\iff&space;\operatorname*{argmax}_{y}&space;P(Y=y&space;\vert&space;\mathbf{x})&space;=&space;&plus;1&space;&&&space;\text{i.e.&space;the&space;point&space;}&space;\mathbf{x}&space;\text{&space;lies&space;on&space;the&space;positive&space;side&space;of&space;the&space;hyperplane&space;iff&space;Naive&space;Bayes&space;predicts&space;}&space;&plus;1&space;\end{align*}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{align*}&space;&&space;\iff&space;\operatorname*{argmax}_{y}&space;P(Y=y&space;\vert&space;\mathbf{x})&space;=&space;&plus;1&space;&&&space;\text{i.e.&space;the&space;point&space;}&space;\mathbf{x}&space;\text{&space;lies&space;on&space;the&space;positive&space;side&space;of&space;the&space;hyperplane&space;iff&space;Naive&space;Bayes&space;predicts&space;}&space;&plus;1&space;\end{align*}" title="\begin{align*} & \iff \operatorname*{argmax}_{y} P(Y=y \vert \mathbf{x}) = +1 && \text{i.e. the point } \mathbf{x} \text{ lies on the positive side of the hyperplane iff Naive Bayes predicts } +1 \end{align*}" /></a>
 
+2. In the case of continuous features (Gaussian Naive Bayes), we can show that
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=P(y&space;\vert&space;\mathbf{x})&space;=&space;\frac{1}{1&plus;e^{-y&space;(\mathbf{w}^\top&space;\mathbf{x}&space;&plus;&space;b)}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(y&space;\vert&space;\mathbf{x})&space;=&space;\frac{1}{1&plus;e^{-y&space;(\mathbf{w}^\top&space;\mathbf{x}&space;&plus;&space;b)}}" title="P(y \vert \mathbf{x}) = \frac{1}{1+e^{-y (\mathbf{w}^\top \mathbf{x} + b)}}" /></a>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+This model is also known as logistic regression. NB and LR produce asymptotically the same model if the Naive Bayes assumption holds.
