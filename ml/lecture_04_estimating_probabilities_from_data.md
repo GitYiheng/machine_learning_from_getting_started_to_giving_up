@@ -100,46 +100,26 @@ A few comments:
 - MAP is a great estimator if an accurate prior belief is available (and mathematically tractable).
 - If <a href="https://www.codecogs.com/eqnedit.php?latex=n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?n" title="n" /></a> is small, MAP can be very wrong if prior belief is wrong!
 
+## "True" Bayesian Approach
 
+Note that MAP is only one way to get an estimator. There is much more information in <a href="https://www.codecogs.com/eqnedit.php?latex=P(\theta&space;\vert&space;D)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(\theta&space;\vert&space;D)" title="P(\theta \vert D)" /></a>, and it seems like a shame to simply compute the mode and throw away all other information. A true Bayesian approach is to use the posterior predictive distribution directly to make prediction about the label <a href="https://www.codecogs.com/eqnedit.php?latex=Y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Y" title="Y" /></a> of a test sample with features <a href="https://www.codecogs.com/eqnedit.php?latex=X" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X" title="X" /></a>:
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=P(Y&space;\vert&space;D,&space;X)&space;=&space;\int_{\theta}&space;P(Y,&space;\theta&space;\vert&space;D,&space;X)&space;d&space;\theta&space;=&space;\int_{\theta}&space;P(Y&space;\vert&space;\theta,&space;D,&space;X)&space;P(\theta&space;\vert&space;D)&space;d&space;\theta" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y&space;\vert&space;D,&space;X)&space;=&space;\int_{\theta}&space;P(Y,&space;\theta&space;\vert&space;D,&space;X)&space;d&space;\theta&space;=&space;\int_{\theta}&space;P(Y&space;\vert&space;\theta,&space;D,&space;X)&space;P(\theta&space;\vert&space;D)&space;d&space;\theta" title="P(Y \vert D, X) = \int_{\theta} P(Y, \theta \vert D, X) d \theta = \int_{\theta} P(Y \vert \theta, D, X) P(\theta \vert D) d \theta" /></a>
 
+Unfortunately, the above is generally *intractable* in closed form and sampling techniques, such as Monte Carlo approximations, are used to approximate the distribution. A pleasant exception are *Gaussian Processes*, which we will cover later.
 
+Another exception is actually our coin toss example. To make *predictions* using <a href="https://www.codecogs.com/eqnedit.php?latex=\theta" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta" title="\theta" /></a> in our coin tossing example, we can use
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{align*}&space;P(heads&space;\vert&space;D)&space;&&space;=&space;\int_{\theta}&space;P(heads,&space;\theta&space;\vert&space;D)&space;d&space;\theta&space;\\&space;&&space;=&space;\int_{\theta}&space;P(heads&space;\vert&space;\theta,&space;D)&space;P(\theta&space;\vert&space;D)&space;d&space;\theta&space;\quad&space;\text{(Chain&space;rule:&space;}&space;P(A,&space;B&space;\vert&space;C)&space;=&space;P(A&space;\vert&space;B,&space;C)&space;P(B&space;\vert&space;C)&space;\text{.)}&space;\\&space;&&space;=&space;\int_{\theta}&space;\theta&space;P(\theta&space;\vert&space;D)&space;d&space;\theta&space;\\&space;&&space;=&space;E[\theta&space;\vert&space;D]&space;\\&space;&&space;=&space;\frac{n_H&space;&plus;&space;\alpha}{n_H&space;&plus;&space;\alpha&space;&plus;&space;n_T&space;&plus;&space;\beta}&space;\end{align*}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{align*}&space;P(heads&space;\vert&space;D)&space;&&space;=&space;\int_{\theta}&space;P(heads,&space;\theta&space;\vert&space;D)&space;d&space;\theta&space;\\&space;&&space;=&space;\int_{\theta}&space;P(heads&space;\vert&space;\theta,&space;D)&space;P(\theta&space;\vert&space;D)&space;d&space;\theta&space;\quad&space;\text{(Chain&space;rule:&space;}&space;P(A,&space;B&space;\vert&space;C)&space;=&space;P(A&space;\vert&space;B,&space;C)&space;P(B&space;\vert&space;C)&space;\text{.)}&space;\\&space;&&space;=&space;\int_{\theta}&space;\theta&space;P(\theta&space;\vert&space;D)&space;d&space;\theta&space;\\&space;&&space;=&space;E[\theta&space;\vert&space;D]&space;\\&space;&&space;=&space;\frac{n_H&space;&plus;&space;\alpha}{n_H&space;&plus;&space;\alpha&space;&plus;&space;n_T&space;&plus;&space;\beta}&space;\end{align*}" title="\begin{align*} P(heads \vert D) & = \int_{\theta} P(heads, \theta \vert D) d \theta \\ & = \int_{\theta} P(heads \vert \theta, D) P(\theta \vert D) d \theta \quad \text{(Chain rule: } P(A, B \vert C) = P(A \vert B, C) P(B \vert C) \text{.)} \\ & = \int_{\theta} \theta P(\theta \vert D) d \theta \\ & = E[\theta \vert D] \\ & = \frac{n_H + \alpha}{n_H + \alpha + n_T + \beta} \end{align*}" /></a>
 
+Here, we used the fact that we defined <a href="https://www.codecogs.com/eqnedit.php?latex=P(heads&space;\vert&space;D,&space;\theta)&space;=&space;P(heads&space;\vert&space;\theta)&space;=&space;\theta" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(heads&space;\vert&space;D,&space;\theta)&space;=&space;P(heads&space;\vert&space;\theta)&space;=&space;\theta" title="P(heads \vert D, \theta) = P(heads \vert \theta) = \theta" /></a> (this is only the case because we assumed that our data is drawn from a binomial distribution -- in general this would not hold).
 
+## Machine Learning and Estimation
 
+In supervised learning you are provided with training data <a href="https://www.codecogs.com/eqnedit.php?latex=D" target="_blank"><img src="https://latex.codecogs.com/gif.latex?D" title="D" /></a>. You use this data to train a model, represented by its parameters <a href="https://www.codecogs.com/eqnedit.php?latex=\theta" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta" title="\theta" /></a>. With this model you want to make predictions on a test point <a href="https://www.codecogs.com/eqnedit.php?latex=x_t" target="_blank"><img src="https://latex.codecogs.com/gif.latex?x_t" title="x_t" /></a>.
 
+- **MLE** Prediction: <a href="https://www.codecogs.com/eqnedit.php?latex=P(y&space;\vert&space;x_t&space;;&space;\theta)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(y&space;\vert&space;x_t&space;;&space;\theta)" title="P(y \vert x_t ; \theta)" /></a> Learning: <a href="https://www.codecogs.com/eqnedit.php?latex=\theta&space;=&space;\operatorname*{argmax}_{\theta}&space;P(D;&space;\theta)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta&space;=&space;\operatorname*{argmax}_{\theta}&space;P(D;&space;\theta)" title="\theta = \operatorname*{argmax}_{\theta} P(D; \theta)" /></a>. Here<a href="https://www.codecogs.com/eqnedit.php?latex=\theta" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta" title="\theta" /></a> is purely a model parameter.
+- **MAP** Prediction: <a href="https://www.codecogs.com/eqnedit.php?latex=P(y&space;\vert&space;x_t,&space;\theta)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(y&space;\vert&space;x_t,&space;\theta)" title="P(y \vert x_t, \theta)" /></a> Learning: <a href="https://www.codecogs.com/eqnedit.php?latex=\theta&space;=&space;\operatorname*{argmax}_{\theta}&space;P(\theta&space;\vert&space;D)&space;\propto&space;P(D&space;\vert&space;\theta)&space;P(\theta)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta&space;=&space;\operatorname*{argmax}_{\theta}&space;P(\theta&space;\vert&space;D)&space;\propto&space;P(D&space;\vert&space;\theta)&space;P(\theta)" title="\theta = \operatorname*{argmax}_{\theta} P(\theta \vert D) \propto P(D \vert \theta) P(\theta)" /></a>. Here <a href="https://www.codecogs.com/eqnedit.php?latex=\theta" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta" title="\theta" /></a> is a random variable.
+- **"True Bayesian"** Prediction: <a href="https://www.codecogs.com/eqnedit.php?latex=P(y&space;\vert&space;x_t&space;,&space;D)&space;=&space;\int_{\theta}&space;P(y&space;\vert&space;\theta)&space;P(\theta&space;\vert&space;D)&space;d&space;\theta" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(y&space;\vert&space;x_t&space;,&space;D)&space;=&space;\int_{\theta}&space;P(y&space;\vert&space;\theta)&space;P(\theta&space;\vert&space;D)&space;d&space;\theta" title="P(y \vert x_t , D) = \int_{\theta} P(y \vert \theta) P(\theta \vert D) d \theta" /></a>. Here <a href="https://www.codecogs.com/eqnedit.php?latex=\theta" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta" title="\theta" /></a> is integrated out -- our prediction takes all possible models into account.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+As always the differences are subtle. In MLE we maximize <a href="https://www.codecogs.com/eqnedit.php?latex=\log&space;[P(D;&space;\theta)]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\log&space;[P(D;&space;\theta)]" title="\log [P(D; \theta)]" /></a>, in MAP we maximize <a href="https://www.codecogs.com/eqnedit.php?latex=\log&space;[P(D&space;\vert&space;\theta)]&space;&plus;&space;\log&space;[P(\theta)]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\log&space;[P(D&space;\vert&space;\theta)]&space;&plus;&space;\log&space;[P(\theta)]" title="\log [P(D \vert \theta)] + \log [P(\theta)]" /></a>. So essentially in MAP we only add the term <a href="https://www.codecogs.com/eqnedit.php?latex=\log&space;[P(\theta)]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\log&space;[P(\theta)]" title="\log [P(\theta)]" /></a> to our optimization. This term is independent of the data and penalizes if the parameters, <a href="https://www.codecogs.com/eqnedit.php?latex=\theta" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta" title="\theta" /></a> deviate too much from what we believe is reasonable. We will later revisit this as a form of *regularization*, where <a href="https://www.codecogs.com/eqnedit.php?latex=\log&space;[P(\theta)]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\log&space;[P(\theta)]" title="\log [P(\theta)]" /></a> will be interpreted as a measure of classifier complexity.
