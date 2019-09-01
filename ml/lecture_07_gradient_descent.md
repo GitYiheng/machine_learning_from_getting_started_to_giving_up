@@ -57,36 +57,8 @@ To find the minimum of the objective, we take its first derivative with respect 
 
 This choice of <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{s}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{s}" title="\mathbf{s}" /></a> converges extremely fast if the approximation is sufficiently accurate and the resulting step sufficiently small. Otherwise it can diverge. Divergence often happens if the function is flat or almost flat with respect to some dimension. In that case the second derivatives are close to zero, and their inverse becomes very large -- resulting in gigantic steps. Different from gradient descent, here there is no step-size that guarantees that steps are all small and local. As the Taylor approximation is only accurate locally, large steps can move the current estimates far from regions where the Taylor approximation is accurate.
 
+# Best Practices
 
+1. The matrix <a href="https://www.codecogs.com/eqnedit.php?latex=H(\mathbf{w})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?H(\mathbf{w})" title="H(\mathbf{w})" /></a> scales <a href="https://www.codecogs.com/eqnedit.php?latex=d&space;\times&space;d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?d&space;\times&space;d" title="d \times d" /></a> and is expensive to compute. A good approximation can be to only compute its diagonal entries and multiply the update with a small step-size. Essentially you are then doing a hybrid between Newton's method and gradient descent, where you weigh the step-size for each dimension by the inverse Hessian.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+2. To avoid divergence of Newton's method, a good approach is to start with gradient descent (or even stochastic gradient descent) and then finish the optimization Newton's method. Typically, the second order approximation, used by Newton's method, is more likely to be appropriate near the optimum.
