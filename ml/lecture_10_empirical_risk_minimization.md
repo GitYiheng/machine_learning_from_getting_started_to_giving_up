@@ -12,6 +12,11 @@ The hinge loss is the SVM's error function of choice, whereas the <a href="https
 
 where the loss function is a continuous function which penalizes training error, and the regularizer is a continuous function which penalizes classifier complexity. Here, we define <a href="https://www.codecogs.com/eqnedit.php?latex=\lambda" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\lambda" title="\lambda" /></a> as <a href="https://www.codecogs.com/eqnedit.php?latex=\frac{1}{C}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{1}{C}" title="\frac{1}{C}" /></a>.
 
+## Commonly Used Binary Classification Loss Functions
+
+Different Machine Learning algorithms use different loss functions. Here are a few examples:
+
+| Loss | | |
 
 
 
