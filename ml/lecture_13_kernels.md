@@ -4,4 +4,66 @@ Linear classifiers are great, but what if there exists no linear decision bounda
 
 ## Handcrafted Feature Expansion
 
-We can make linear classifiers non-linear by applying basis function (feature transformations) on the input feature vectors. Formally, for a data vector <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{x}&space;\in&space;\mathbb{R}^d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{x}&space;\in&space;\mathbb{R}^d" title="\mathbf{x} \in \mathbb{R}^d" /></a>, we apply the transformation <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{x}&space;\rightarrow&space;\phi&space;(\mathbf{x})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{x}&space;\rightarrow&space;\phi&space;(\mathbf{x})" title="\mathbf{x} \rightarrow \phi (\mathbf{x})" /></a> where 
+We can make linear classifiers non-linear by applying basis function (feature transformations) on the input feature vectors. Formally, for a data vector <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{x}&space;\in&space;\mathbb{R}^d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{x}&space;\in&space;\mathbb{R}^d" title="\mathbf{x} \in \mathbb{R}^d" /></a>, we apply the transformation <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{x}&space;\rightarrow&space;\phi&space;(\mathbf{x})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{x}&space;\rightarrow&space;\phi&space;(\mathbf{x})" title="\mathbf{x} \rightarrow \phi (\mathbf{x})" /></a> where <a href="https://www.codecogs.com/eqnedit.php?latex=\phi&space;(\mathbf{x})&space;\in&space;\mathbb{R}^D" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\phi&space;(\mathbf{x})&space;\in&space;\mathbb{R}^D" title="\phi (\mathbf{x}) \in \mathbb{R}^D" /></a>. Usually <a href="https://www.codecogs.com/eqnedit.php?latex=D&space;\gg&space;d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?D&space;\gg&space;d" title="D \gg d" /></a> because we add dimensions that capture non-linear interactions among the original features.
+
+Advantage: It is simple, and your problem stays convex and well behaved. (i.e. you can still use your original gradient descent code, just with the higher dimensional representation)
+
+Disadvantage: <a href="https://www.codecogs.com/eqnedit.php?latex=\phi&space;(\mathbf{x})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\phi&space;(\mathbf{x})" title="\phi (\mathbf{x})" /></a> might be very high dimensional.
+
+Consider the following example: <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{x}&space;=&space;\begin{pmatrix}&space;x_1&space;\\&space;x_2&space;\\&space;\vdots&space;\\&space;x_d&space;\end{pmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{x}&space;=&space;\begin{pmatrix}&space;x_1&space;\\&space;x_2&space;\\&space;\vdots&space;\\&space;x_d&space;\end{pmatrix}" title="\mathbf{x} = \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_d \end{pmatrix}" /></a>, and define <a href="https://www.codecogs.com/eqnedit.php?latex=\phi&space;(\mathbf{x})&space;=&space;\begin{pmatrix}&space;1&space;\\&space;x_1&space;\\&space;\vdots&space;\\&space;x_d&space;\\&space;x_1&space;x_2&space;\\&space;\vdots&space;\\&space;x_{d-1}&space;x_d&space;\\&space;\vdots&space;\\&space;x_1&space;x_2&space;\cdots&space;x_d&space;\end{pmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\phi&space;(\mathbf{x})&space;=&space;\begin{pmatrix}&space;1&space;\\&space;x_1&space;\\&space;\vdots&space;\\&space;x_d&space;\\&space;x_1&space;x_2&space;\\&space;\vdots&space;\\&space;x_{d-1}&space;x_d&space;\\&space;\vdots&space;\\&space;x_1&space;x_2&space;\cdots&space;x_d&space;\end{pmatrix}" title="\phi (\mathbf{x}) = \begin{pmatrix} 1 \\ x_1 \\ \vdots \\ x_d \\ x_1 x_2 \\ \vdots \\ x_{d-1} x_d \\ \vdots \\ x_1 x_2 \cdots x_d \end{pmatrix}" /></a>
+
+This new representation, <a href="https://www.codecogs.com/eqnedit.php?latex=\phi&space;(\mathbf{x})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\phi&space;(\mathbf{x})" title="\phi (\mathbf{x})" /></a>, is very expressive and allows for complicated non-linear decision boundaries -- but the dimensionality is extremely high. This makes our algorithm unbearable (and quickly prohibitively) slow.
+
+## The Kernel Trick
+
+### Gradient Descent with Squared Loss
+
+The kernel trick is a way to get around this dilemma by learning a function in the much higher dimensional space, without ever computing a single vector <a href="https://www.codecogs.com/eqnedit.php?latex=\phi&space;(\mathbf{x})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\phi&space;(\mathbf{x})" title="\phi (\mathbf{x})" /></a> or ever computing the full vector <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{w}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{w}" title="\mathbf{w}" /></a>. It is a little magical.
+
+It is based on the following observation: If we use gradient descent with any one of our standard loss function, the gradient is a linear combination of the input samples. For example, let us take a look at the squared loss:
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\ell&space;(\mathbf{w})&space;=&space;\sum_{i=1}^{n}&space;(\mathbf{w}^{\top}&space;\mathbf{x}_{i}&space;-&space;y_i)^2" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\ell&space;(\mathbf{w})&space;=&space;\sum_{i=1}^{n}&space;(\mathbf{w}^{\top}&space;\mathbf{x}_{i}&space;-&space;y_i)^2" title="\ell (\mathbf{w}) = \sum_{i=1}^{n} (\mathbf{w}^{\top} \mathbf{x}_{i} - y_i)^2" /></a>
+
+The gradient descent rule, with step-size/learning-rate <a href="https://www.codecogs.com/eqnedit.php?latex=s&space;>&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s&space;>&space;0" title="s > 0" /></a> (we denote this as <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha&space;>&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha&space;>&space;0" title="\alpha > 0" /></a> previously), updates <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{w}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{w}" title="\mathbf{w}" /></a> over time,
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=w_{t&plus;1}&space;\leftarrow&space;w_t&space;-&space;s(\frac{\partial&space;\ell}{\partial&space;\mathbf{w}})&space;\enspace&space;\text{where}&space;\enspace&space;\frac{\partial&space;\ell}{\partial&space;\mathbf{w}}&space;=&space;\sum_{i=1}^{n}&space;\underbrace{2(\mathbf{w}^{\top}&space;\mathbf{x}_i&space;-&space;y_i)}_{\gamma_i&space;\text{:&space;function&space;of&space;}&space;\mathbf{x}_i,&space;y_i}&space;\mathbf{x}_{i}&space;=&space;\sum_{i=1}^{n}&space;\gamma_i&space;\mathbf{x}_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w_{t&plus;1}&space;\leftarrow&space;w_t&space;-&space;s(\frac{\partial&space;\ell}{\partial&space;\mathbf{w}})&space;\enspace&space;\text{where}&space;\enspace&space;\frac{\partial&space;\ell}{\partial&space;\mathbf{w}}&space;=&space;\sum_{i=1}^{n}&space;\underbrace{2(\mathbf{w}^{\top}&space;\mathbf{x}_i&space;-&space;y_i)}_{\gamma_i&space;\text{:&space;function&space;of&space;}&space;\mathbf{x}_i,&space;y_i}&space;\mathbf{x}_{i}&space;=&space;\sum_{i=1}^{n}&space;\gamma_i&space;\mathbf{x}_{i}" title="w_{t+1} \leftarrow w_t - s(\frac{\partial \ell}{\partial \mathbf{w}}) \enspace \text{where} \enspace \frac{\partial \ell}{\partial \mathbf{w}} = \sum_{i=1}^{n} \underbrace{2(\mathbf{w}^{\top} \mathbf{x}_i - y_i)}_{\gamma_i \text{: function of } \mathbf{x}_i, y_i} \mathbf{x}_{i} = \sum_{i=1}^{n} \gamma_i \mathbf{x}_{i}" /></a>
+
+We will now show that we can express <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{w}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{w}" title="\mathbf{w}" /></a> as a linear combination of all input vectors,
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{w}&space;=&space;\sum_{i=1}^{n}&space;\alpha_i&space;\mathbf{x}_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{w}&space;=&space;\sum_{i=1}^{n}&space;\alpha_i&space;\mathbf{x}_i" title="\mathbf{w} = \sum_{i=1}^{n} \alpha_i \mathbf{x}_i" /></a>
+
+Since the loss is convex, the final solution is independent of the initialization, and we can initialize <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{w}_0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{w}_0" title="\mathbf{w}_0" /></a> to be whatever we want. For convenience, let us pick <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{w}_0&space;=&space;\begin{pmatrix}&space;0&space;\\&space;\vdots&space;\\&space;0&space;\end{pmatrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{w}_0&space;=&space;\begin{pmatrix}&space;0&space;\\&space;\vdots&space;\\&space;0&space;\end{pmatrix}" title="\mathbf{w}_0 = \begin{pmatrix} 0 \\ \vdots \\ 0 \end{pmatrix}" /></a>. For the initial choice of <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{w}_0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{w}_0" title="\mathbf{w}_0" /></a>, the linear combination in <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{w}&space;=&space;\sum_{i=1}^{n}&space;\alpha_i&space;\mathbf{x}_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{w}&space;=&space;\sum_{i=1}^{n}&space;\alpha_i&space;\mathbf{x}_i" title="\mathbf{w} = \sum_{i=1}^{n} \alpha_i \mathbf{x}_i" /></a> is trivially <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_1&space;=&space;\cdots&space;=&space;\alpha_n&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_1&space;=&space;\cdots&space;=&space;\alpha_n&space;=&space;0" title="\alpha_1 = \cdots = \alpha_n = 0" /></a>. We now show that throughout the entire gradient descent optimization such coefficients <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_1,&space;\ldots,\alpha_n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_1,&space;\ldots,\alpha_n" title="\alpha_1, \ldots,\alpha_n" /></a> must always exist, as we can re-write the gradient updates entirely in terms of updating the <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_i" title="\alpha_i" /></a> coefficients:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
