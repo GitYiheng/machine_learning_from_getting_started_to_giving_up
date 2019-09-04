@@ -62,63 +62,38 @@ This gives use the decomposition of expected test error as follows
 
 **Noise**: How big is the data-intrinsic noise? This error measures ambiguity due to your data distribution and feature representation. You can never beat this, it is an aspect of the data.
 
+## Detecting High Bias and High Variance
 
+If a classifier is under-performing (e.g. if the test or training error is too high), there are several ways to improve performance. To find out which of these many techniques is the right one for the situation, the first step is to determine the root of the problem.
 
+The training error and the test error can be divided into two overarching regimes. In the first regime, training error is below the desired error threshold (denoted by <a href="https://www.codecogs.com/eqnedit.php?latex=\epsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\epsilon" title="\epsilon" /></a>), but test error is significantly higher. In the second regime, test error is remarkably close to training error, but both are above the desired tolerance of <a href="https://www.codecogs.com/eqnedit.php?latex=\epsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\epsilon" title="\epsilon" /></a>.
 
+### Regime 1 (High Variance)
 
+In the first regime, the cause of the poor performance is high variance.
 
+**Symptoms**:
 
+1. Training error is much lower than test error
+2. Training error is lower than <a href="https://www.codecogs.com/eqnedit.php?latex=\epsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\epsilon" title="\epsilon" /></a>
+3. Test error is above <a href="https://www.codecogs.com/eqnedit.php?latex=\epsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\epsilon" title="\epsilon" /></a>
 
+**Remedies**:
 
+- Add more training data
+- Reduce model complexity -- complex models are prone to high variance
+- Bagging
 
+### Regime 2 (High Bias)
 
+Unlike the first regime, the second regime indicates high bias: the model being used is not robust enough to produce an accurate prediction.
 
+**Symptoms**:
 
+1. Training error is higher than <a href="https://www.codecogs.com/eqnedit.php?latex=\epsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\epsilon" title="\epsilon" /></a>
 
+**Remedies**:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- Use more complex model (e.g. kernelize, use non-linear models)
+- Add features
+- Boosting
