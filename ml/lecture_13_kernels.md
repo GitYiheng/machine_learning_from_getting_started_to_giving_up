@@ -84,63 +84,32 @@ During training in the new high dimensional space of <a href="https://www.codeco
 
 As we have <a href="https://www.codecogs.com/eqnedit.php?latex=n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?n" title="n" /></a> such updates to do, the amount of work per gradient update in the transformed space is <a href="https://www.codecogs.com/eqnedit.php?latex=O(n^2)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?O(n^2)" title="O(n^2)" /></a> -- far better than <a href="https://www.codecogs.com/eqnedit.php?latex=O(2^d)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?O(2^d)" title="O(2^d)" /></a>.
 
+## General Kernels
 
+Below are some popular kernel functions:
 
+**Linear**: <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{K}&space;(\mathbf{x},&space;\mathbf{z})&space;=&space;\mathbf{x}^{\top}&space;\mathbf{z}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{K}&space;(\mathbf{x},&space;\mathbf{z})&space;=&space;\mathbf{x}^{\top}&space;\mathbf{z}" title="\mathbf{K} (\mathbf{x}, \mathbf{z}) = \mathbf{x}^{\top} \mathbf{z}" /></a>
 
+(The linear kernel is equivalent to just using a good old linear classifier -- but it can be faster to use a kernel matrix if the dimensionality <a href="https://www.codecogs.com/eqnedit.php?latex=d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?d" title="d" /></a> of the data is high.)
 
+**Polynomial**: <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{K}&space;(\mathbf{x},&space;\mathbf{z})&space;=&space;(1&space;&plus;&space;\mathbf{x}^{\top}&space;\mathbf{z})^d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{K}&space;(\mathbf{x},&space;\mathbf{z})&space;=&space;(1&space;&plus;&space;\mathbf{x}^{\top}&space;\mathbf{z})^d" title="\mathbf{K} (\mathbf{x}, \mathbf{z}) = (1 + \mathbf{x}^{\top} \mathbf{z})^d" /></a>
 
+**Radial Basis Function (RBF) (a.k.a. Gaussian Kernel)**: <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{K}&space;(\mathbf{x},&space;\mathbf{z})&space;=&space;e^{\frac{-\|&space;\mathbf{x}&space;-&space;\mathbf{z}&space;\|^2}{\sigma^2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{K}&space;(\mathbf{x},&space;\mathbf{z})&space;=&space;e^{\frac{-\|&space;\mathbf{x}&space;-&space;\mathbf{z}&space;\|^2}{\sigma^2}}" title="\mathbf{K} (\mathbf{x}, \mathbf{z}) = e^{\frac{-\| \mathbf{x} - \mathbf{z} \|^2}{\sigma^2}}" /></a>
 
+The RBF kernel is the most popular Kernel! It is a **Universal Approximator**!! Its corresponding feature vector is infinite dimensional and cannot be computed. However, very effective low dimensional approximations exist.
 
+**Exponential Kernel**: <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{K}&space;(\mathbf{x},&space;\mathbf{z})&space;=&space;e^{\frac{-\|&space;\mathbf{x}&space;-&space;\mathbf{z}&space;\|}{2\sigma^2}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{K}&space;(\mathbf{x},&space;\mathbf{z})&space;=&space;e^{\frac{-\|&space;\mathbf{x}&space;-&space;\mathbf{z}&space;\|}{2\sigma^2}}" title="\mathbf{K} (\mathbf{x}, \mathbf{z}) = e^{\frac{-\| \mathbf{x} - \mathbf{z} \|}{2\sigma^2}}" /></a>
 
+**Laplacian Kernel**: <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{K}&space;(\mathbf{x},&space;\mathbf{z})&space;=&space;e^{\frac{-\vert&space;\mathbf{x}&space;-&space;\mathbf{z}&space;\vert}{\sigma}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{K}&space;(\mathbf{x},&space;\mathbf{z})&space;=&space;e^{\frac{-\vert&space;\mathbf{x}&space;-&space;\mathbf{z}&space;\vert}{\sigma}}" title="\mathbf{K} (\mathbf{x}, \mathbf{z}) = e^{\frac{-\vert \mathbf{x} - \mathbf{z} \vert}{\sigma}}" /></a>
 
+**Sigmoid Kernel**: <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{K}&space;(\mathbf{x},&space;\mathbf{z})&space;=&space;\text{tanh}&space;(\mathbf{a}&space;\mathbf{x}^{\top}&space;&plus;&space;c)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{K}&space;(\mathbf{x},&space;\mathbf{z})&space;=&space;\text{tanh}&space;(\mathbf{a}&space;\mathbf{x}^{\top}&space;&plus;&space;c)" title="\mathbf{K} (\mathbf{x}, \mathbf{z}) = \text{tanh} (\mathbf{a} \mathbf{x}^{\top} + c)" /></a>
 
+### Kernel Functions
 
+Can any function <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{K}(\cdot,&space;\cdot)&space;\rightarrow&space;\mathcal{R}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{K}(\cdot,&space;\cdot)&space;\rightarrow&space;\mathcal{R}" title="\mathbf{K}(\cdot, \cdot) \rightarrow \mathcal{R}" /></a> be used as a kernel?
 
+No, the matrix <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{K}&space;(\mathbf{x}_i&space;,&space;\mathbf{x}_j)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{K}&space;(\mathbf{x}_i&space;,&space;\mathbf{x}_j)" title="\mathbf{K} (\mathbf{x}_i , \mathbf{x}_j)" /></a> has to correspond to real inner-products after some transformation <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{x}&space;\rightarrow&space;\phi&space;(\mathbf{x})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{x}&space;\rightarrow&space;\phi&space;(\mathbf{x})" title="\mathbf{x} \rightarrow \phi (\mathbf{x})" /></a>. This is the case if and only if <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{K}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{K}" title="\mathbf{K}" /></a> is *positive semi-definite*.
 
+**Definition**: A matrix <a href="https://www.codecogs.com/eqnedit.php?latex=A&space;\in&space;\mathbb{R}^{n&space;\times&space;n}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?A&space;\in&space;\mathbb{R}^{n&space;\times&space;n}" title="A \in \mathbb{R}^{n \times n}" /></a> is positive semi-definite iff <a href="https://www.codecogs.com/eqnedit.php?latex=\forall&space;\mathbf{q}&space;\in&space;\mathbb{R}^{n},&space;\mathbf{q}^{\top}&space;\mathbf{A}\mathbf{q}&space;\geq&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\forall&space;\mathbf{q}&space;\in&space;\mathbb{R}^{n},&space;\mathbf{q}^{\top}&space;\mathbf{A}\mathbf{q}&space;\geq&space;0" title="\forall \mathbf{q} \in \mathbb{R}^{n}, \mathbf{q}^{\top} \mathbf{A}\mathbf{q} \geq 0" /></a>.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Remember <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{K}_{ij}&space;=&space;\phi&space;(\mathbf{x}_i)^{\top}&space;\phi&space;(\mathbf{x}_j)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{K}_{ij}&space;=&space;\phi&space;(\mathbf{x}_i)^{\top}&space;\phi&space;(\mathbf{x}_j)" title="\mathbf{K}_{ij} = \phi (\mathbf{x}_i)^{\top} \phi (\mathbf{x}_j)" /></a>. So <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{K}&space;=&space;\Phi^{\top}&space;\Phi" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{K}&space;=&space;\Phi^{\top}&space;\Phi" title="\mathbf{K} = \Phi^{\top} \Phi" /></a>, where <a href="https://www.codecogs.com/eqnedit.php?latex=\Phi&space;=&space;[\phi&space;(\mathbf{x}_1),&space;\ldots,&space;\phi&space;(\mathbf{x}_n)]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\Phi&space;=&space;[\phi&space;(\mathbf{x}_1),&space;\ldots,&space;\phi&space;(\mathbf{x}_n)]" title="\Phi = [\phi (\mathbf{x}_1), \ldots, \phi (\mathbf{x}_n)]" /></a>. It follows that <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{K}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{K}" title="\mathbf{K}" /></a> is positive semi-definite, because <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{q}^{\top}&space;\mathbf{K}&space;\mathbf{q}&space;=&space;(\Phi^{\top}&space;\mathbf{q})^2&space;\geq&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{q}^{\top}&space;\mathbf{K}&space;\mathbf{q}&space;=&space;(\Phi^{\top}&space;\mathbf{q})^2&space;\geq&space;0" title="\mathbf{q}^{\top} \mathbf{K} \mathbf{q} = (\Phi^{\top} \mathbf{q})^2 \geq 0" /></a>. Inversely, if any matrix <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{A}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{A}" title="\mathbf{A}" /></a> is positive semi-definite, it can be decomposed as <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{A}&space;=&space;\Phi^{\top}&space;\Phi" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{A}&space;=&space;\Phi^{\top}&space;\Phi" title="\mathbf{A} = \Phi^{\top} \Phi" /></a> for some realization of <a href="https://www.codecogs.com/eqnedit.php?latex=\Phi" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\Phi" title="\Phi" /></a>.
