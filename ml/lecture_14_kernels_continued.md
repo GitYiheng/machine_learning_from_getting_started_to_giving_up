@@ -115,79 +115,42 @@ Quiz: Let <a href="https://www.codecogs.com/eqnedit.php?latex=D&space;=&space;\{
 
 The original, **primal** SVM is a quadratic programming problem:
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{align*}&space;&&space;\min_{\mathbf{w},&space;b}&space;\mathbf{w}^{\top}&space;\mathbf{w}&space;&plus;&space;C&space;\sum_{i=1}^{n}&space;\xi_i&space;\\&space;\text{s.t.&space;}&space;\forall&space;i,&space;&&space;y_i&space;(\mathbf{w}^{\top}&space;\mathbf{x}_i&space;&plus;&space;b)&space;\geq&space;1&space;-&space;\xi_i&space;\\&space;&&space;\xi_i&space;\geq&space;0&space;\end{align*}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{align*}&space;&&space;\min_{\mathbf{w},&space;b}&space;\mathbf{w}^{\top}&space;\mathbf{w}&space;&plus;&space;C&space;\sum_{i=1}^{n}&space;\xi_i&space;\\&space;\text{s.t.&space;}&space;\forall&space;i,&space;&&space;y_i&space;(\mathbf{w}^{\top}&space;\mathbf{x}_i&space;&plus;&space;b)&space;\geq&space;1&space;-&space;\xi_i&space;\\&space;&&space;\xi_i&space;\geq&space;0&space;\end{align*}" title="\begin{align*} & \min_{\mathbf{w}, b} \mathbf{w}^{\top} \mathbf{w} + C \sum_{i=1}^{n} \xi_i \\ \text{s.t. } \forall i, & y_i (\mathbf{w}^{\top} \mathbf{x}_i + b) \geq 1 - \xi_i \\ & \xi_i \geq 0 \end{align*}" /></a>
 
+has the dual form
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{align*}&space;\min_{\alpha_1&space;,&space;\cdots,&space;\alpha_n}&space;&&space;\frac{1}{2}&space;\sum_{i,&space;j}&space;\alpha_i&space;\alpha_j&space;y_i&space;y_j&space;K_{ij}&space;-&space;\sum_{i=1}^{n}&space;\alpha_i&space;\\&space;\text{s.t.&space;}&space;0&space;&&space;\leq&space;\alpha_i&space;\leq&space;C&space;\\&space;\sum_{i=1}^{n}&space;&&space;\alpha_i&space;y_i&space;=&space;0&space;\end{align*}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{align*}&space;\min_{\alpha_1&space;,&space;\cdots,&space;\alpha_n}&space;&&space;\frac{1}{2}&space;\sum_{i,&space;j}&space;\alpha_i&space;\alpha_j&space;y_i&space;y_j&space;K_{ij}&space;-&space;\sum_{i=1}^{n}&space;\alpha_i&space;\\&space;\text{s.t.&space;}&space;0&space;&&space;\leq&space;\alpha_i&space;\leq&space;C&space;\\&space;\sum_{i=1}^{n}&space;&&space;\alpha_i&space;y_i&space;=&space;0&space;\end{align*}" title="\begin{align*} \min_{\alpha_1 , \cdots, \alpha_n} & \frac{1}{2} \sum_{i, j} \alpha_i \alpha_j y_i y_j K_{ij} - \sum_{i=1}^{n} \alpha_i \\ \text{s.t. } 0 & \leq \alpha_i \leq C \\ \sum_{i=1}^{n} & \alpha_i y_i = 0 \end{align*}" /></a>
 
+where <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{w}&space;=&space;\sum_{i=1}^{n}&space;\alpha_i&space;y_i&space;\phi&space;(\mathbf{x}_i)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{w}&space;=&space;\sum_{i=1}^{n}&space;\alpha_i&space;y_i&space;\phi&space;(\mathbf{x}_i)" title="\mathbf{w} = \sum_{i=1}^{n} \alpha_i y_i \phi (\mathbf{x}_i)" /></a> (although this is never computed) and
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=h(\mathbf{x})&space;=&space;\text{sign}&space;\Big(&space;\sum_{i=1}^{n}&space;\alpha_i&space;y_i&space;k&space;(\mathbf{x}_i&space;,&space;\mathbf{x})&space;&plus;&space;b&space;\Big)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h(\mathbf{x})&space;=&space;\text{sign}&space;\Big(&space;\sum_{i=1}^{n}&space;\alpha_i&space;y_i&space;k&space;(\mathbf{x}_i&space;,&space;\mathbf{x})&space;&plus;&space;b&space;\Big)" title="h(\mathbf{x}) = \text{sign} \Big( \sum_{i=1}^{n} \alpha_i y_i k (\mathbf{x}_i , \mathbf{x}) + b \Big)" /></a>
 
+#### Support Vectors
 
+There is a very nice interpretation of the dual problem in terms of support vectors. For the primal formulation we know that only support vectors satisfy the constraint with equality:
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=y_i&space;(\mathbf{w}^{\top}&space;\phi&space;(x_i)&space;&plus;&space;b)&space;=&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_i&space;(\mathbf{w}^{\top}&space;\phi&space;(x_i)&space;&plus;&space;b)&space;=&space;1" title="y_i (\mathbf{w}^{\top} \phi (x_i) + b) = 1" /></a>
 
+In the dual, these same training inputs can be identified as their corresponding dual values satisfy <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_i&space;>&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_i&space;>&space;0" title="\alpha_i > 0" /></a> (all other training inputs have <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_i&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_i&space;=&space;0" title="\alpha_i = 0" /></a>). For test-time you only need to compute the sum in <a href="https://www.codecogs.com/eqnedit.php?latex=h(\mathbf{x})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h(\mathbf{x})" title="h(\mathbf{x})" /></a> over the support vectors and all inputs <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{x}_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{x}_i" title="\mathbf{x}_i" /></a> with <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_i&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_i&space;=&space;0" title="\alpha_i = 0" /></a> can be discarded after training.
 
+#### Recovering <a href="https://www.codecogs.com/eqnedit.php?latex=b" target="_blank"><img src="https://latex.codecogs.com/gif.latex?b" title="b" /></a>
 
+One apparent problem with the dual version is that <a href="https://www.codecogs.com/eqnedit.php?latex=b" target="_blank"><img src="https://latex.codecogs.com/gif.latex?b" title="b" /></a> is no longer part of the optimization. However, we need it to perform classification. Luckily, we know that the primal solution and the dual solution are identical. Support vectors are those with <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_i&space;>&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_i&space;>&space;0" title="\alpha_i > 0" /></a>. We can then solve the following equation for <a href="https://www.codecogs.com/eqnedit.php?latex=b" target="_blank"><img src="https://latex.codecogs.com/gif.latex?b" title="b" /></a>
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{align*}&space;y_i&space;(\mathbf{w}^{\top}&space;\phi&space;(x_i)&space;&plus;&space;b)&space;&&space;=&space;1&space;\\&space;y_i&space;\Big(&space;\sum_j&space;y_j&space;\alpha_j&space;k&space;(\mathbf{x}_j&space;,&space;\mathbf{x}_i)&space;&plus;&space;b&space;\Big)&space;&&space;=&space;1&space;\\&space;y_i&space;-&space;\sum_j&space;y_j&space;\alpha_j&space;k&space;(\mathbf{x}_j&space;,&space;\mathbf{x}_i)&space;&&space;=&space;b&space;\end{align*}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{align*}&space;y_i&space;(\mathbf{w}^{\top}&space;\phi&space;(x_i)&space;&plus;&space;b)&space;&&space;=&space;1&space;\\&space;y_i&space;\Big(&space;\sum_j&space;y_j&space;\alpha_j&space;k&space;(\mathbf{x}_j&space;,&space;\mathbf{x}_i)&space;&plus;&space;b&space;\Big)&space;&&space;=&space;1&space;\\&space;y_i&space;-&space;\sum_j&space;y_j&space;\alpha_j&space;k&space;(\mathbf{x}_j&space;,&space;\mathbf{x}_i)&space;&&space;=&space;b&space;\end{align*}" title="\begin{align*} y_i (\mathbf{w}^{\top} \phi (x_i) + b) & = 1 \\ y_i \Big( \sum_j y_j \alpha_j k (\mathbf{x}_j , \mathbf{x}_i) + b \Big) & = 1 \\ y_i - \sum_j y_j \alpha_j k (\mathbf{x}_j , \mathbf{x}_i) & = b \end{align*}" /></a>
 
+This allows us to solve for <a href="https://www.codecogs.com/eqnedit.php?latex=b" target="_blank"><img src="https://latex.codecogs.com/gif.latex?b" title="b" /></a> from the support vectors (in practice it is best to average the <a href="https://www.codecogs.com/eqnedit.php?latex=b" target="_blank"><img src="https://latex.codecogs.com/gif.latex?b" title="b" /></a> from several support vectors, as there may be numerical precision problems).
 
+Quiz: What is the dual form of the hard-margin SVM?
 
+## Kernel SVM -- the Smart Nearest Neighbor
 
+Do you remember the <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>-nearest neighbor algorithm? For binary classification problems (<a href="https://www.codecogs.com/eqnedit.php?latex=y_i&space;\in&space;\{&space;&plus;1&space;,&space;-1&space;\}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_i&space;\in&space;\{&space;&plus;1&space;,&space;-1&space;\}" title="y_i \in \{ +1 , -1 \}" /></a>), we can write the decision function for a test point <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{z}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{z}" title="\mathbf{z}" /></a> as
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=h(\mathbf{z})&space;=&space;\text{sign}&space;\Big(&space;\sum_{i=1}^{n}&space;y_i&space;\delta^{nn}&space;(\mathbf{x}_i&space;,&space;\mathbf{z})&space;\Big)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h(\mathbf{z})&space;=&space;\text{sign}&space;\Big(&space;\sum_{i=1}^{n}&space;y_i&space;\delta^{nn}&space;(\mathbf{x}_i&space;,&space;\mathbf{z})&space;\Big)" title="h(\mathbf{z}) = \text{sign} \Big( \sum_{i=1}^{n} y_i \delta^{nn} (\mathbf{x}_i , \mathbf{z}) \Big)" /></a>
 
+where <a href="https://www.codecogs.com/eqnedit.php?latex=\delta^{nn}&space;(\mathbf{x}_i&space;,&space;\mathbf{z})&space;\in&space;\{&space;0,&space;1&space;\}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\delta^{nn}&space;(\mathbf{x}_i&space;,&space;\mathbf{z})&space;\in&space;\{&space;0,&space;1&space;\}" title="\delta^{nn} (\mathbf{x}_i , \mathbf{z}) \in \{ 0, 1 \}" /></a> with <a href="https://www.codecogs.com/eqnedit.php?latex=\delta^{nn}&space;(\mathbf{x}_i&space;,&space;\mathbf{z})&space;=&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\delta^{nn}&space;(\mathbf{x}_i&space;,&space;\mathbf{z})&space;=&space;1" title="\delta^{nn} (\mathbf{x}_i , \mathbf{z}) = 1" /></a> only if <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{x}_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{x}_i" title="\mathbf{x}_i" /></a> is one of the <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a> nearest neighbors of test point <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{z}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{z}" title="\mathbf{z}" /></a>. The SVM decision function
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=h(\mathbf{z})&space;=&space;\text{sign}&space;\Big(&space;\sum_{i=1}^{n}&space;y_i&space;\alpha_i&space;k&space;(\mathbf{x}_i&space;,&space;\mathbf{z})&space;&plus;&space;b&space;\Big)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h(\mathbf{z})&space;=&space;\text{sign}&space;\Big(&space;\sum_{i=1}^{n}&space;y_i&space;\alpha_i&space;k&space;(\mathbf{x}_i&space;,&space;\mathbf{z})&space;&plus;&space;b&space;\Big)" title="h(\mathbf{z}) = \text{sign} \Big( \sum_{i=1}^{n} y_i \alpha_i k (\mathbf{x}_i , \mathbf{z}) + b \Big)" /></a>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+is very similar, but instead of limiting the decision to the <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a> nearest neighbors, it considers *all* training points but the kernel function assigns more weight to those that are closer (large <a href="https://www.codecogs.com/eqnedit.php?latex=k(\mathbf{z},&space;\mathbf{x}_i)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k(\mathbf{z},&space;\mathbf{x}_i)" title="k(\mathbf{z}, \mathbf{x}_i)" /></a>). In some sense you can veiw the RBF kernel as a soft nearest neighbor assignment, as the exponential decay with distance will assign almost no weight to all but the neighboring points of <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{z}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{z}" title="\mathbf{z}" /></a>. The Kernel SVM algorithm also learns a weight <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_i&space;>&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_i&space;>&space;0" title="\alpha_i > 0" /></a> for each training point and a bias <a href="https://www.codecogs.com/eqnedit.php?latex=b" target="_blank"><img src="https://latex.codecogs.com/gif.latex?b" title="b" /></a> and it essentially "removes" useless training points by setting many <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_i&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_i&space;=&space;0" title="\alpha_i = 0" /></a>.
