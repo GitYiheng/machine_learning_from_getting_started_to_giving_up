@@ -155,52 +155,12 @@ Gaussian Process Regression has the following properties:
 - We can model non-Gaussian likelihoods in regression and do approximate inference for e.g., count data (Poisson distribution)
 - GP implementations: GPyTorch, GPML (MATLAB), GPys, pyGPs, and scikit-learn (Python)
 
+## Application: Bayesian Global Optimization
 
+A nice applications of GP regression is Bayesian Global Optimization. Here, the goal is to optimize the hyper-parameters of a machine learning algorithm to do well on a fixed validation data set. Imagine you have <a href="https://www.codecogs.com/eqnedit.php?latex=d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?d" title="d" /></a> hyper-parameters to tune, then your data set consists of <a href="https://www.codecogs.com/eqnedit.php?latex=d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?d" title="d" /></a>-dimensional vectors <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{x}_i&space;\in&space;\mathcal{R}^d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{x}_i&space;\in&space;\mathcal{R}^d" title="\mathbf{x}_i \in \mathcal{R}^d" /></a>, where each training point represents a particular hyper-parameter setting and the labels <a href="https://www.codecogs.com/eqnedit.php?latex=y_i&space;\in&space;\mathcal{R}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_i&space;\in&space;\mathcal{R}" title="y_i \in \mathcal{R}" /></a> represents the validation error. *Don't get confused, this time vectors <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{x}_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{x}_i" title="\mathbf{x}_i" /></a> correspond to hyper-parameter settings and not data*. For example, in the case of an SVM with polynomial kernel you have two hyper-parameters: the regularization constant <a href="https://www.codecogs.com/eqnedit.php?latex=C" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C" title="C" /></a> (also often <a href="https://www.codecogs.com/eqnedit.php?latex=\lambda" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\lambda" title="\lambda" /></a>) and the polynomial power <a href="https://www.codecogs.com/eqnedit.php?latex=p" target="_blank"><img src="https://latex.codecogs.com/gif.latex?p" title="p" /></a>. The first dimension of <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{x}_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{x}_i" title="\mathbf{x}_i" /></a> may correspond to a value for <a href="https://www.codecogs.com/eqnedit.php?latex=C" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C" title="C" /></a> and the second dimension may correspond to a value of <a href="https://www.codecogs.com/eqnedit.php?latex=p" target="_blank"><img src="https://latex.codecogs.com/gif.latex?p" title="p" /></a>. Initially you train your classifier under a few random hyper-parameter settings and evaluate the classifier on the validation set. This gives you <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{x}_1&space;,&space;\ldots&space;,&space;\mathbf{x}_m" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{x}_1&space;,&space;\ldots&space;,&space;\mathbf{x}_m" title="\mathbf{x}_1 , \ldots , \mathbf{x}_m" /></a> with labels <a href="https://www.codecogs.com/eqnedit.php?latex=y_1&space;,&space;\ldots&space;,&space;y_m" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_1&space;,&space;\ldots&space;,&space;y_m" title="y_1 , \ldots , y_m" /></a>. You can now train a Gaussian Process to predict the validation error <a href="https://www.codecogs.com/eqnedit.php?latex=y_t" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_t" title="y_t" /></a> at any new hyper-parameter setting <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{x}_t" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{x}_t" title="\mathbf{x}_t" /></a>. In fact, you obtain a mean prediction <a href="https://www.codecogs.com/eqnedit.php?latex=y_t&space;=&space;h(\mathbf{x}_t)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_t&space;=&space;h(\mathbf{x}_t)" title="y_t = h(\mathbf{x}_t)" /></a> and its variance <a href="https://www.codecogs.com/eqnedit.php?latex=v(\mathbf{x}_t)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?v(\mathbf{x}_t)" title="v(\mathbf{x}_t)" /></a>. If you have more time you can now explore a new point. The most promising point is the one with the lowest lower confidence bound, i.e.
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=\operatorname*{argmin}_{\mathbf{x}_t}&space;h(\mathbf{x}_t)&space;-&space;\kappa&space;\sqrt{v(\mathbf{x}_t)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\operatorname*{argmin}_{\mathbf{x}_t}&space;h(\mathbf{x}_t)&space;-&space;\kappa&space;\sqrt{v(\mathbf{x}_t)}" title="\operatorname*{argmin}_{\mathbf{x}_t} h(\mathbf{x}_t) - \kappa \sqrt{v(\mathbf{x}_t)}" /></a>
 
+The constant <a href="https://www.codecogs.com/eqnedit.php?latex=\kappa&space;>&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\kappa&space;>&space;0" title="\kappa > 0" /></a> trades off how much you want to *explore* points that may be good just because you are very uncertain (variance is high) or how much you want to *exploit* your knowledge about the current best point and refine the best settings found so far. A small <a href="https://www.codecogs.com/eqnedit.php?latex=\kappa" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\kappa" title="\kappa" /></a> leads to more exploitation, whereas a large <a href="https://www.codecogs.com/eqnedit.php?latex=\kappa" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\kappa" title="\kappa" /></a> explores new hyper-parameter settings more aggressively.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{align*}&space;&&space;\textbf{Algorithm:}&space;\mathcal{A},&space;m,&space;n,&space;\kappa&space;\\&space;&&space;\text{For&space;}&space;i&space;=&space;1&space;\text{&space;to&space;}&space;m&space;\\&space;&&space;\qquad&space;\text{sample&space;}&space;\mathbf{x}_i&space;\text{&space;randomly}&space;&&&space;\text{e.g.&space;sample&space;uniformly&space;with&space;reasonable&space;range}&space;\\&space;&&space;\qquad&space;y_i&space;=&space;\mathcal{A}(\mathbf{x}_i)&space;&&&space;\text{compute&space;validation&space;error}&space;\\&space;&&space;\text{EndFor}&space;\\&space;&&space;\text{For&space;}&space;i=m&plus;1&space;\text{&space;to&space;}&space;n&space;\\&space;&&space;\qquad&space;\text{Update&space;kernel&space;}&space;K&space;\text{&space;based&space;on&space;}&space;\mathbf{x}_1,&space;\ldots,&space;\mathbf{x}_{i-1}&space;\\&space;&&space;\qquad&space;\mathbf{x}_i&space;=&space;\operatorname*{argmin}_{\mathbf{x}_t}&space;K_t^\top&space;(K&space;&plus;&space;\sigma^2&space;I)^{-1}&space;y&space;-&space;\kappa&space;\sqrt{K_{tt}&space;&plus;&space;\sigma^2&space;I&space;-&space;K_t^\top&space;(K&space;&plus;&space;\sigma^2&space;I)^{-1}&space;K_t}&space;\\&space;&&space;\qquad&space;y_i&space;=&space;\mathcal{A}(\mathbf{x}_i)&space;&&&space;\text{compute&space;validation&space;error}&space;\\&space;&&space;\text{EndFor}&space;\\&space;&&space;i_{\text{best}}&space;=&space;\operatorname*{argmin}_i&space;\{&space;y_1,\ldots,y_n&space;\}&space;&&&space;\text{find&space;best&space;hyper-parameter&space;setting&space;explored}&space;\\&space;&&space;\text{Return&space;}&space;\mathbf{x}_{i_{\text{best}}}&space;&&&space;\text{return&space;best&space;hyper-parameter&space;setting&space;explored}&space;\end{align*}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{align*}&space;&&space;\textbf{Algorithm:}&space;\mathcal{A},&space;m,&space;n,&space;\kappa&space;\\&space;&&space;\text{For&space;}&space;i&space;=&space;1&space;\text{&space;to&space;}&space;m&space;\\&space;&&space;\qquad&space;\text{sample&space;}&space;\mathbf{x}_i&space;\text{&space;randomly}&space;&&&space;\text{e.g.&space;sample&space;uniformly&space;with&space;reasonable&space;range}&space;\\&space;&&space;\qquad&space;y_i&space;=&space;\mathcal{A}(\mathbf{x}_i)&space;&&&space;\text{compute&space;validation&space;error}&space;\\&space;&&space;\text{EndFor}&space;\\&space;&&space;\text{For&space;}&space;i=m&plus;1&space;\text{&space;to&space;}&space;n&space;\\&space;&&space;\qquad&space;\text{Update&space;kernel&space;}&space;K&space;\text{&space;based&space;on&space;}&space;\mathbf{x}_1,&space;\ldots,&space;\mathbf{x}_{i-1}&space;\\&space;&&space;\qquad&space;\mathbf{x}_i&space;=&space;\operatorname*{argmin}_{\mathbf{x}_t}&space;K_t^\top&space;(K&space;&plus;&space;\sigma^2&space;I)^{-1}&space;y&space;-&space;\kappa&space;\sqrt{K_{tt}&space;&plus;&space;\sigma^2&space;I&space;-&space;K_t^\top&space;(K&space;&plus;&space;\sigma^2&space;I)^{-1}&space;K_t}&space;\\&space;&&space;\qquad&space;y_i&space;=&space;\mathcal{A}(\mathbf{x}_i)&space;&&&space;\text{compute&space;validation&space;error}&space;\\&space;&&space;\text{EndFor}&space;\\&space;&&space;i_{\text{best}}&space;=&space;\operatorname*{argmin}_i&space;\{&space;y_1,\ldots,y_n&space;\}&space;&&&space;\text{find&space;best&space;hyper-parameter&space;setting&space;explored}&space;\\&space;&&space;\text{Return&space;}&space;\mathbf{x}_{i_{\text{best}}}&space;&&&space;\text{return&space;best&space;hyper-parameter&space;setting&space;explored}&space;\end{align*}" title="\begin{align*} & \textbf{Algorithm:} \mathcal{A}, m, n, \kappa \\ & \text{For } i = 1 \text{ to } m \\ & \qquad \text{sample } \mathbf{x}_i \text{ randomly} && \text{e.g. sample uniformly with reasonable range} \\ & \qquad y_i = \mathcal{A}(\mathbf{x}_i) && \text{compute validation error} \\ & \text{EndFor} \\ & \text{For } i=m+1 \text{ to } n \\ & \qquad \text{Update kernel } K \text{ based on } \mathbf{x}_1, \ldots, \mathbf{x}_{i-1} \\ & \qquad \mathbf{x}_i = \operatorname*{argmin}_{\mathbf{x}_t} K_t^\top (K + \sigma^2 I)^{-1} y - \kappa \sqrt{K_{tt} + \sigma^2 I - K_t^\top (K + \sigma^2 I)^{-1} K_t} \\ & \qquad y_i = \mathcal{A}(\mathbf{x}_i) && \text{compute validation error} \\ & \text{EndFor} \\ & i_{\text{best}} = \operatorname*{argmin}_i \{ y_1,\ldots,y_n \} && \text{find best hyper-parameter setting explored} \\ & \text{Return } \mathbf{x}_{i_{\text{best}}} && \text{return best hyper-parameter setting explored} \end{align*}" /></a>
