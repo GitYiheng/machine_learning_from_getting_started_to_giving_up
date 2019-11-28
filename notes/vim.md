@@ -122,6 +122,10 @@ You can also leave command mode by pressing Escape.
 
 `r` (**r**eplace) never enter insert mode at all. Instead, it expects another character, which it will then use to replace the character currently under the cursor.
 
+# Replace Mode
+
+`R` enter replace mode: each character you type replaces an existing character, starting with the character under the cursor
+
 # Undo and Redo
 
 `u` undo
