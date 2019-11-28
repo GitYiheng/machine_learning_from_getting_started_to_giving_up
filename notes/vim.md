@@ -138,6 +138,24 @@ You can also leave command mode by pressing Escape.
 
 `gJ` joint `[count]` lines, with a minimum of two lines. Don't insert or remove any space.
 
+`:[range]s/{pattern}/{string}/[flags] [count]` for each line in `[range]` replace a match of `{pattern}` with `{string}`
+  - `:s/old/new/g` replace old with new in the current line
+  - `:1s/is/isn't/` replace `is` with `isn't` in the 1st line
+  - `:1,5s/for/FOR/g` replace all `for` with `FOR` from line 1 to line 5
+  - `$` represents last line
+  - `.` represents current line
+  - `.,$` represents from current line to last line
+  - `%` represents all lines, that is entire file
+  - `:%s/{pattern}/{string}/g` global substitution
+
+# Line Number
+
+`:set nu` turn on line number
+
+`:set nonu` turn off line number
+
+`:set nu!` toggle line number
+
 # Replace Mode
 
 `R` enter replace mode: each character you type replaces an existing character, starting with the character under the cursor
