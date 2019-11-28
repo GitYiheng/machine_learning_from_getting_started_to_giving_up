@@ -102,12 +102,17 @@ You can also leave command mode by pressing Escape.
 # Inserting
 
 `i` insert text before the cursor
-
-`a` append text after the cursor
+  - `3i` `abc` `esc` will insert `abc` 3 times, that is, `abcabcabc`
 
 `I` insert text before the first non-blank in the line
 
+`a` append text after the cursor
+
 `A` append text at the end of the line
+
+`o` begin a new line below the cursor and insert text
+
+`O` begin a new line above the cursor and insert text
 
 # Substitution
 
