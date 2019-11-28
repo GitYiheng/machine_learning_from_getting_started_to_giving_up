@@ -142,6 +142,7 @@ paste = put
   - `"1` holds last text deleted (`d`) or changed (`c`)
   - Numbered registers shift with each `d` or `c`
 - Named
+  - `"a`, `"b`, ..., `"z`
 - Black hole register: `"_`
   - Can be used to delete things without affecting normal registers
 
