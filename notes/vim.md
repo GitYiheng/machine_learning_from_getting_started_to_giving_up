@@ -27,8 +27,6 @@ After a command completes in line mode you are returned to normal mode.
 
 You can also leave command mode by pressing Escape.
 
-`a` append text after the cursor. `i` append text before the cursor.
-
 # Navigation
 
 `h` left
@@ -100,6 +98,16 @@ You can also leave command mode by pressing Escape.
 `x` delete a single character
 
 `.` repeat the last action
+
+# Inserting
+
+`i` insert text before the cursor
+
+`a` append text after the cursor
+
+`I` insert text before the first non-blank in the line
+
+`A` append text at the end of the line
 
 # Substitution
 
