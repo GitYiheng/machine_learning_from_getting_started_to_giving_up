@@ -27,6 +27,8 @@ After a command completes in line mode you are returned to normal mode.
 
 You can also leave command mode by pressing Escape.
 
+`a` append text after the cursor. `i` append text before the cursor.
+
 # Navigation
 
 `h` left
