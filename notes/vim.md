@@ -119,8 +119,24 @@ You can also leave command mode by pressing Escape.
 `s` (**s**ubstitute) delete the current character and place the user in insert mode with the cursor between the two surrounding characters. For example, `3s` deletes the next three characters and place the user in insert mode.
 
 `c` (**c**hange) take a vi/vim motion (such as `w`, `j`, `b`, etc.). It deletes the characters from the current cursor position up to the end of the movement. Note that this means that `s` is equivalent to `cl` (vim documentation itself claims these are synonyms).
+  - `C` = `c$` change text from cursor position to the end of the line
+  - `cc` change the entire line
 
 `r` (**r**eplace) never enter insert mode at all. Instead, it expects another character, which it will then use to replace the character currently under the cursor.
+
+`~` switch case of the character under the cursor and move the cursor to the right
+  - `g~{motion}` switch case of `{motion}` text. For example, `g~$` switchs cases from the cursor to the end of the line
+  - `g~~` = `g~g~` switch cases for the current line
+
+`gU{motion}` make `{motion}` text uppercase
+  - `gUU` make the current line uppercase
+
+`gu{motion}` make `{motion}` text lowercase
+  - `guu` make the current line lowercase
+
+`J` joint `[count]` lines, with a minimum of two lines. Remove the indent and insert up to two spaces.
+
+`gJ` joint `[count]` lines, with a minimum of two lines. Don't insert or remove any space.
 
 # Replace Mode
 
