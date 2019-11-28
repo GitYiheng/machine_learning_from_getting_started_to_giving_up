@@ -97,6 +97,12 @@ You can also leave command mode by pressing Escape.
 
 # Deleting, Yanking, and Putting
 
+cut = delete
+
+copy = yank
+
+paste = put
+
 `p` paste text after the cursor from register
 
 `P` paste text before the cursor from register
