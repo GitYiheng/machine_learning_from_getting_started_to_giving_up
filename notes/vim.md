@@ -97,7 +97,7 @@ You can also leave command mode by pressing Escape.
 
 `x` delete a single character
 
-`.` repeat the last action
+`.` repeat last change, with count replaced with `[count]`
 
 # Inserting
 
@@ -188,6 +188,36 @@ paste = put
 `"Ayw` copy one word into register a (append)
 
 `"ap` paste text from register a after the cursor
+
+# Searching
+
+`f{char}` to `[count]`th occurrence of `{char}` to the right
+
+`F{char}` to `[count]`th occurrence of `{char}` to the left
+
+`;` repeat last `f`, `t`, `F`, `T` `[count]` times
+
+`,` repeat last `f`, `t`, `F`, `T` in opposite direction `[count]` times
+
+`t` till before `[count]`th occurrence of `{char}` to the right
+
+`T` till after `[count]`th occurrence of `{char}` to the left
+
+`/{pattern}[/]<CR>` search forward for the `[count]`th occurrence of `{pattern}` exclusive
+
+`?{pattern}[?]<CR>` search backward for the `[count]`th occurrence of `{pattern}` exclusive
+
+`n` repeat the last `/` or `?` `[count]` times
+
+`N` repeat the last `/` or `?` `[count]` times in opposite direction
+
+`*` search forward for the `[count]`th occurrence of the word nearest to the cursor
+
+`#` search backward for the `[count]`th occurrence of the word nearest to the cursor
+
+`:set hls` highlight search on
+
+`:set nohls` highlight search of:
 
 # Vimrc
 
