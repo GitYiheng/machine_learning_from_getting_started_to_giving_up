@@ -99,6 +99,14 @@ You can also leave command mode by pressing Escape.
 
 `.` repeat the last action
 
+# Substitution
+
+`s` (**s**ubstitute) delete the current character and place the user in insert mode with the cursor between the two surrounding characters. For example, `3s` deletes the next three characters and place the user in insert mode.
+
+`c` (**c**hange) take a vi/vim motion (such as `w`, `j`, `b`, etc.). It deletes the characters from the current cursor position up to the end of the movement. Note that this means that `s` is equivalent to `cl` (vim documentation itself claims these are synonyms).
+
+`r` (**r**eplace) never enter insert mode at all. Instead, it expects another character, which it will then use to replace the character currently under the cursor.
+
 # Undo and Redo
 
 `u` undo
