@@ -55,6 +55,14 @@ You can also leave command mode by pressing Escape.
 
 `$` move to the end of the line
 
+`)` move to the start of the next sentence
+
+`(` move to the start of the previous sentence
+
+`}` move to the start of the next paragraph or block of text
+
+`{` move to the start of the previous paragraph or block of text
+
 `ctrl+f` move down one page
 
 `ctrl+b` move back up one page
@@ -62,6 +70,8 @@ You can also leave command mode by pressing Escape.
 `gg` go to the first line in the file
 
 `G` go to the last line in the file
+
+`#` where `#` is the number of a line, this command takes you to the line specified
 
 `ctrl+g` print the current file name, the cursor position, and the file status
 
@@ -84,6 +94,10 @@ You can also leave command mode by pressing Escape.
 `db` delete the part of the word before the cursor
 
 `dd` delete the line
+
+`x` delete a single character
+
+`.` repeat the last action
 
 # Undo and Redo
 
@@ -110,6 +124,16 @@ paste = put
 `y` copy text into register
 
 `yy` copy lines into register
+
+## Register Types
+
+- Unnamed: `""`
+  - `""` holds text from `d`, `c`, `s`, `x`, and `y` operations.
+- Numbered: `"0`, `"1`, ..., `"9`
+  - `"0` holds last text yanked (`y`)
+  - `"1` holds last text deleted (`d`) or changed (`c`)
+  - Numbered registers shift with each `d` or `c`
+- Named
 
 `:reg` display the contents of registers
 
