@@ -291,6 +291,18 @@ To execute the macro <number> times (once by default), type:
 
 In plain language, to record a macro, use the `q` command followed by a register name. To stop, type `q` again. There is no special macro register. There is only one `a` register, for example. To replay the macro use `@` followed by the register name. To repeat the most recent macro, use `@@`.
 
+`:{range}norm[!] {commands}` execute normal commands `{commands}` for each line in the `{range}`. Before executing the `{commands}`, the cursor is positioned in the first column of the range, for each line.
+
+For example, `:27,35norm @d` applys the macro in register `d` from line 27 to line 35.
+
+You also can edit macros. For example, use `"ap` to paste content in register `a` and edit it. Then `0"ay$` to save the modified content into register `a`.
+
+Notes: `CTRL-V + esc` represent escape
+
+`q{register}` overwrite the register
+
+`q{CAPITAL_REGISTER}` append to the register
+
 # Vimrc
 
 - rc = run commands
