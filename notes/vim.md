@@ -257,6 +257,24 @@ paste = put
 
 `CTRL+W` + `h` or `j` or `k` or `l` switch among splitted windows
 
+# Text Objects
+
+`{operator}{a}{object}`
+  - `daw` delete a word
+  - `das` delete a sentence
+  - `dap` delete a paragraph
+  - `da[` or `da]` delete content in `[...]` including the square brackets
+  - `da(` = `da)`, `da<` = `da>`, `da{` = `da}` = `daB`, `da"`, `da'` work in the same way
+  - `dat` delete content within a tag including the tag, `<p>...</p>` &rarr; ` `
+
+`{operator}{a}{object}`
+  - `ciw` change inner word
+  - `dis` delete inner sentence
+  - `dip` delete inner paragraph
+  - `di[` or `di]` delete content in `[...]` but the square brackets are untouched
+  - `di(` = `di)`, `di<` = `di>,``di{` = `di}` = `diB`, `di"`, `di'` work in the same way
+  - `dit` delete content within a tag but the tag is untouched, `<p>...</p>` &rarr; `<p></p>`
+
 # Vimrc
 
 - rc = run commands
