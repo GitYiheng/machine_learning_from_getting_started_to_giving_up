@@ -253,6 +253,10 @@ paste = put
 
 `:[N]sf [++opt] [+cmd] {file}` same as `:split`, but search for `{file}` in `path` like in `:find`. Doesn't split if `{file}` is not found.
 
+`:{count}on[!]` or `CTRL+W o` make the current window the only one on the screen. All other windows are closed.
+
+`CTRL+W` + `h` or `j` or `k` or `l` switch among splitted windows
+
 # Vimrc
 
 - rc = run commands
