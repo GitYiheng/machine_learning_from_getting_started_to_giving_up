@@ -237,6 +237,22 @@ paste = put
 
 `:set nohls` highlight search of:
 
+# Window Split
+
+`:[N]sp [++opt] [+cmd] [file]` split current window in two. The result is two viewports on the same file. Make the new window `N` high (default is to use half the height of the current window). Reduces the current window height to create room. If `[file]` is given it will be edited in the new window. If it is not loaded in any buffer, it will be read. Else the new window will use the already loaded buffer.
+
+`:[N]vs [++opt] [+cmd] [file]` like `:split`, but split vertically.
+
+`:[N]new [++opt] [+cmd]` create a new window and start editing an empty file in it. Make new window `N` high (default is to use half the existing height). Reduces the current window height to create room.
+
+`:[N]vne [++opt] [+cmd] [file]` like `:new`, but split vertically.
+
+`:[N]sp [++opt] [+cmd] {file}` create a new window and start editing file `{file}` in it. This behaves like a `:split` first, and then an `:e` command. If `[+cmd]` is given, execute the command when the file has been loaded `+cmd`.
+
+`:[N]sv [++opt] [+cmd] {file}` same as `:split`, but set `readonly` option for this buffer. **s**plit**v**iew
+
+`:[N]sf [++opt] [+cmd] {file}` same as `:split`, but search for `{file}` in `path` like in `:find`. Doesn't split if `{file}` is not found.
+
 # Vimrc
 
 - rc = run commands
