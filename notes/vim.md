@@ -307,6 +307,36 @@ Save macros in `vimrc` file:
 
 `let @{register} = 'keystrokes'`
 
+# Visual Mode
+
+When editing text with Vim, visual mode can be extremely useful for identifying chunks of text to be manipulated.
+
+Vim's visual mode has three versions: character, line, and block. The keystrokes to enter each mode are:
+
+- Character mode: `v`
+- Line mode: `V`
+- Block mode: `CTRL+V`
+
+While in (any of the three) Visual mode(s), pressing `o` will move the cursor to the opposite end of the selection. In Visual Block mode, you can also press `O`, allowing you to position the cursor in any of the four corners.
+
+`iw` in visual mode selects the inner word.
+
+`ap` in visual mode selects the paragraph.
+
+`gv` start visual mode with the same area as the previous area and the same mode. In visual mode the current and the previous visual area are exchanged. After using `p` or `P` in visual mode the text that was put will be selected.
+
+You can use `>>` and `<<` to indent and unindent. `>{text_object}` and `>{text_object}` work as well.
+
+`:set shiftwidth=4`
+
+`:set list`
+
+`:set list!`
+
+`:set expandtab`
+
+Use visual mode to select target content and press `:` enters the command mode `:'<,'>`. Type `ce 80` (i.e. `:'<'>center 80`) to center selected text based on 80-character width. Similarly, `le` for left aligned, `ri` for right aligned.
+
 # Vimrc
 
 - rc = run commands
