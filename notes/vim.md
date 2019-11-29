@@ -275,6 +275,22 @@ paste = put
   - `di(` = `di)`, `di<` = `di>,``di{` = `di}` = `diB`, `di"`, `di'` work in the same way
   - `dit` delete content within a tag but the tag is untouched, `<p>...</p>` &rarr; `<p></p>`
 
+# Macros
+
+Recording a macro is a great way to perform a one-time task, or to get things done quickly when you don't want to mess with Vim script or mappings, or if you do not yet know how to do it more elegantly.
+
+Each register is identified by a letter `a` to `z`.
+
+To enter a macro, type:
+
+`q<letter><commands>q`
+
+To execute the macro <number> times (once by default), type:
+
+`<number>@<letter>`
+
+In plain language, to record a macro, use the `q` command followed by a register name. To stop, type `q` again. There is no special macro register. There is only one `a` register, for example. To replay the macro use `@` followed by the register name. To repeat the most recent macro, use `@@`.
+
 # Vimrc
 
 - rc = run commands
