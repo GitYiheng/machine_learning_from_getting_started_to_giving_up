@@ -303,6 +303,10 @@ Notes: `CTRL-V + esc` represent escape
 
 `q{CAPITAL_REGISTER}` append to the register
 
+Save macros in `vimrc` file:
+
+`let @{register} = 'keystrokes'`
+
 # Vimrc
 
 - rc = run commands
