@@ -239,11 +239,11 @@ paste = put
 
 # Window Split
 
-`:[N]sp [++opt] [+cmd] [file]` split current window in two. The result is two viewports on the same file. Make the new window `N` high (default is to use half the height of the current window). Reduces the current window height to create room. If `[file]` is given it will be edited in the new window. If it is not loaded in any buffer, it will be read. Else the new window will use the already loaded buffer.
+`:[N]sp [++opt] [+cmd] [file]` or `CTRL+W s` split current window in two. The result is two viewports on the same file. Make the new window `N` high (default is to use half the height of the current window). Reduces the current window height to create room. If `[file]` is given it will be edited in the new window. If it is not loaded in any buffer, it will be read. Else the new window will use the already loaded buffer. **sp**lit
 
-`:[N]vs [++opt] [+cmd] [file]` like `:split`, but split vertically.
+`:[N]vs [++opt] [+cmd] [file]` or `CTRL+W v` like `:split`, but split vertically. **v**ertical**sp**lit
 
-`:[N]new [++opt] [+cmd]` create a new window and start editing an empty file in it. Make new window `N` high (default is to use half the existing height). Reduces the current window height to create room.
+`:[N]new [++opt] [+cmd]` or `CTRL+W n` create a new window and start editing an empty file in it. Make new window `N` high (default is to use half the existing height). Reduces the current window height to create room.
 
 `:[N]vne [++opt] [+cmd] [file]` like `:new`, but split vertically.
 
