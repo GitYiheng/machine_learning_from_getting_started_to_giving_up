@@ -255,7 +255,13 @@ paste = put
 
 `:{count}on[!]` or `CTRL+W o` make the current window the only one on the screen. All other windows are closed.
 
-`CTRL+W` + `h` or `j` or `k` or `l` switch among splitted windows
+`CTRL+W` + `h` or `j` or `k` or `l` switch among splitted windows.
+
+`CTRL+W` + `H` or `J` or `K` or `L` move splitted windows to the designated position.
+
+`CTRL+W` + `+` or `-` or `<` or `>` or `=` adjust height and width of current window split.
+
+`CTRL+W` + `r` or `R` rotate windows.
 
 # Text Objects
 
