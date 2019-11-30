@@ -108,3 +108,62 @@ set -g status-bg  black
 ```
 tmux kill-session -t target_session
 ```
+
+## Session Management
+
+`tmux new -s session_name` creates a new tmux session named `session_name`
+
+`tmux attach -t session_name` attaches to an existing tmux session named `session_name`
+
+`tmux switch -t session_name` switches to an existing session named `session_name`
+
+`tmux list-sessions` lists existing tmux sessions
+
+`tmux detach (prefix + d)` detach the currently attached session
+
+## Windows
+
+tmux has a tabbed interface, but it calls its tabs "windows". To stay organized, it is recommended to rename all the windows based on their purposes.
+
+`tmux new-window (prefix + c)` create a new window
+
+`tmux select-window -t :0-9 (prefix + 0-9)` move to the window based on index
+
+`tmux rename-window (prefix + ,)` rename the current window
+
+## Panes
+
+`tmux split-window (prefix + ")` splits the window into two vertical panes
+
+`tmux split-window -h (prefix + %)` splits the window into two horizontal panes
+
+`tmux swap-pane -[UDLR] (prefix + { or })` swaps pane with another in the specified direction
+
+`tmux select-pane -[UDLR]` selects the next pane in the specified direction
+
+`tmux select-pane -t :.+` selects the next pane in numerical order
+
+## Helpful tmux commands
+
+`tmux list-keys` lists out every bound key and the tmux command it runs
+
+`tmux list-commands` lists out every tmux command and its arguments
+
+`tmux info` lists out every session, window, pane, its pid, etc.
+
+`tmux source-file ~/.tmux.conf` reloads the current tmux configuration (based on a default tmux config)
+
+## tmux and Vim
+
+Install the `vim-tmux-navigator` Vim plugin from Chris Toomey. With `vundle`, that’s as simple as adding the following to your `~/.vimrc` file: `Bundle 'christoomey/vim-tmux-navigator'`
+
+Add the following to your `~/.tmux.conf` configuration file to conditionally bind the movement keys depending on the active command:
+
+```
+# smart pane switching with awareness of vim splits
+bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-h) || tmux select-pane -L"
+bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-j) || tmux select-pane -D"
+bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-k) || tmux select-pane -U"
+bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-l) || tmux select-pane -R"
+bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys 'C-\\') || tmux select-pane -l"
+```
