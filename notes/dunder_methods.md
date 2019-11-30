@@ -21,3 +21,29 @@ if __name__ == '__main__':
   # Print object location
   print(string1)
 ```
+
+Output:
+
+```
+<__main__.String object at 0x7f8fc832cb00>
+```
+
+The above snippet of code prints only the memory address of the string object. Let’s add a `__repr__` method to represent our object.
+
+```python
+# Declare our own string class
+class String:
+  # Magic method to initiate object
+  def __init__(self, string):
+    self.string = string
+  # Print our string object
+  def __repr__(self):
+    return 'Object: {}'.format(self.string)
+
+# Driver Code
+if __name__ == '__main__':
+  # object creation
+  string1 = String('Hello')
+  # print object location
+  print(string1)
+```
