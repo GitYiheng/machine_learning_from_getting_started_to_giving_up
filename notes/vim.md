@@ -237,32 +237,6 @@ paste = put
 
 `:set nohls` highlight search of:
 
-# Window Split
-
-`:[N]sp [++opt] [+cmd] [file]` or `CTRL+W s` split current window in two. The result is two viewports on the same file. Make the new window `N` high (default is to use half the height of the current window). Reduces the current window height to create room. If `[file]` is given it will be edited in the new window. If it is not loaded in any buffer, it will be read. Else the new window will use the already loaded buffer. **sp**lit
-
-`:[N]vs [++opt] [+cmd] [file]` or `CTRL+W v` like `:split`, but split vertically. **v**ertical**sp**lit
-
-`:[N]new [++opt] [+cmd]` or `CTRL+W n` create a new window and start editing an empty file in it. Make new window `N` high (default is to use half the existing height). Reduces the current window height to create room.
-
-`:[N]vne [++opt] [+cmd] [file]` like `:new`, but split vertically.
-
-`:[N]sp [++opt] [+cmd] {file}` create a new window and start editing file `{file}` in it. This behaves like a `:split` first, and then an `:e` command. If `[+cmd]` is given, execute the command when the file has been loaded `+cmd`.
-
-`:[N]sv [++opt] [+cmd] {file}` same as `:split`, but set `readonly` option for this buffer. **s**plit**v**iew
-
-`:[N]sf [++opt] [+cmd] {file}` same as `:split`, but search for `{file}` in `path` like in `:find`. Doesn't split if `{file}` is not found.
-
-`:{count}on[!]` or `CTRL+W o` make the current window the only one on the screen. All other windows are closed.
-
-`CTRL+W` + `h` or `j` or `k` or `l` switch among splitted windows.
-
-`CTRL+W` + `H` or `J` or `K` or `L` move splitted windows to the designated position.
-
-`CTRL+W` + `+` or `-` or `<` or `>` or `=` adjust height and width of current window split.
-
-`CTRL+W` + `r` or `R` rotate windows.
-
 # Text Objects
 
 `{operator}{a}{object}`
@@ -413,3 +387,34 @@ For example, `:map <F2> i# Author:<CR># Date Created:<CR># Description:<CR># Dat
 `:wa` write all changed buffers.
 
 `:[N]Explore[!] [dir]...` explore directory of current file. Will open the local-directory browser on the current file's directory (or on directory `[dir]` if specified). The window will be split only if the file has been modified and `hidden` is not set, otherwise the browser window will take over the window. Normally the splitting is taken horizontally.
+
+
+# Window Split
+
+`:[N]sp [++opt] [+cmd] [file]` or `CTRL+W s` split current window in two. The result is two viewports on the same file. Make the new window `N` high (default is to use half the height of the current window). Reduces the current window height to create room. If `[file]` is given it will be edited in the new window. If it is not loaded in any buffer, it will be read. Else the new window will use the already loaded buffer. **sp**lit
+
+`:[N]vs [++opt] [+cmd] [file]` or `CTRL+W v` like `:split`, but split vertically. **v**ertical**sp**lit
+
+`:[N]new [++opt] [+cmd]` or `CTRL+W n` create a new window and start editing an empty file in it. Make new window `N` high (default is to use half the existing height). Reduces the current window height to create room.
+
+`:[N]vne [++opt] [+cmd] [file]` like `:new`, but split vertically.
+
+`:[N]sp [++opt] [+cmd] {file}` create a new window and start editing file `{file}` in it. This behaves like a `:split` first, and then an `:e` command. If `[+cmd]` is given, execute the command when the file has been loaded `+cmd`.
+
+`:[N]sv [++opt] [+cmd] {file}` same as `:split`, but set `readonly` option for this buffer. **s**plit**v**iew
+
+`:[N]sf [++opt] [+cmd] {file}` same as `:split`, but search for `{file}` in `path` like in `:find`. Doesn't split if `{file}` is not found.
+
+`:{count}on[!]` or `CTRL+W o` make the current window the only one on the screen. All other windows are closed.
+
+`CTRL+W` + `h` or `j` or `k` or `l` switch among splitted windows.
+
+`CTRL+W` + `H` or `J` or `K` or `L` move splitted windows to the designated position.
+
+`CTRL+W` + `+` or `-` or `<` or `>` or `=` adjust height and width of current window split.
+
+`CTRL+W` + `r` or `R` rotate windows.
+
+`:[N]ba [N]` rearrange the screen to open one window for each buffer in the buffer list. When a count is given, this is the maximum number of windows to open.
+
+`:[range]windo {cmd}` execute `{cmd}` in each window or if `[range]` is given only in windows for which the window number lies in the `[range]`.
