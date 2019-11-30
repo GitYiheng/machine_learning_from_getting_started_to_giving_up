@@ -372,3 +372,7 @@ For example, `:map <F2> i# Author:<CR># Date Created:<CR># Description:<CR># Dat
 - `<bar>` `|`
 - `<C-X>` CTRL-X
 - `<F1>-<F12>` function keys
+
+# Buffers
+
+`:[N]b[!] [+cmd] [N]` edit buffer `[N]` from the buffer list. If `[N]` is not given, the current buffer remains being edited.
