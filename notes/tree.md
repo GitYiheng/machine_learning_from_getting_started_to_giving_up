@@ -52,5 +52,5 @@ tree [-adfgilnopqrstuxACDFNS] [-L level [-R]] [-H baseHREF] [-T title] [-o filen
 - `-H baseHREF` turn on HTML output, including HTTP references. Useful for ftp sites. baseHREF gives the base ftp location when using HTML output. That is, the local directory may be `/local/ftp/pub`, but it must be referenced as `ftp://host-name.organization.domain/pub` (baseHREF should be `ftp://hostname.organization.domain`). Hint: don’t use ANSI lines with this option, and don’t give more than one directory in the directory list. If you want to use colors via CSS stylesheet, use the `-C` option in addition to this option to force color output.
 - `-T title` sets the title and H1 header string in HTML output mode.
 - `--charset {charset}` set the character set to use when outputting HTML and for line drawing.
-- `–nolinks` turns off hyperlinks in HTML output.
+- `--nolinks` turns off hyperlinks in HTML output.
 - `-o {file_name}` send output to file name.
