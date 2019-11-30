@@ -375,4 +375,31 @@ For example, `:map <F2> i# Author:<CR># Date Created:<CR># Description:<CR># Dat
 
 # Buffers
 
+`:e [++opt] [+cmd] {file}` edit `{file}`. This fails when changes have been made to the current buffer, unless `:set hidden`.
+
+- `%` means that this line corresponds to the buffer in the current window.
+- `a` means that it is an active buffer which is loaded and visible
+- `h` means that it is now a hidden buffer
+- `#` means that it is the alternate buffer
+
+`:ls[!] [flag]` show all buffers.
+
 `:[N]b[!] [+cmd] [N]` edit buffer `[N]` from the buffer list. If `[N]` is not given, the current buffer remains being edited.
+
+`:[N]bn[!] [+cmd] [N]` go to `[N]`th next buffer list. `[N]` defaults to one. Wraps around the end of the buffer list.
+
+`:[N]bp[!] [+cmd] [N]` go to `[N]`th previous buffer list. `[N]` defaults to one. Wraps around the end of the buffer list.
+
+`:bad [+lnum] {fname}` add file name `{fname}` to the buffer list, without loading it. If `lnum` is specified, the cursor will be positioned at that line when the buffer is first entered.
+
+`:bd[!] [N]` unload buffer `[N]` (default: current buffer) and delete it from the buffer list. If the buffer was changed, this fails, unless when `[!]` is specified, in which case changes are lost. The file remains unaffected. Any windows for this buffer are closed. If buffer `[N]` is the current buffer, another buffer will be displayed instead. This is the most recent entry in the jump list that points into a loaded buffer.
+
+`:bdelete[!] {bufname}` delete buffer given by name.
+
+`:bdelete[!] N1 N2` delete buffer for given number.
+
+`[range]bufdo[!] {cmd}` execute `{cmd}` in each buffer in the buffer list or if `[range]` is given only for buffers for which their buffer number is in the `[range]`. For example, `:bufdo %s/#/@/g | w`.
+
+`:wa` write all changed buffers.
+
+`:[N]Explore[!] [dir]...` explore directory of current file. Will open the local-directory browser on the current file's directory (or on directory `[dir]` if specified). The window will be split only if the file has been modified and `hidden` is not set, otherwise the browser window will take over the window. Normally the splitting is taken horizontally.
