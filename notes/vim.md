@@ -265,6 +265,8 @@ paste = put
   - `di(` = `di)`, `di<` = `di>,``di{` = `di}` = `diB`, `di"`, `di'` work in the same way
   - `dit` delete content within a tag but the tag is untouched, `<p>...</p>` &rarr; `<p></p>`
 
+`{operator}{t}{object}` until something
+
 # Macros
 
 Recording a macro is a great way to perform a one-time task, or to get things done quickly when you don't want to mess with Vim script or mappings, or if you do not yet know how to do it more elegantly.
