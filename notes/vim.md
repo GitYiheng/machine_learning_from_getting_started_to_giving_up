@@ -345,3 +345,30 @@ Use visual mode to select target content and press `:` enters the command mode `
 - Windows: $HOME/_vimrc
 - Each line is executed as a command
   - `set ruler` = `:set ruler`
+
+Key mapping refers to creating a shortcut for repeating a sequence of keys or commands. You can map keys to execute frequently used key sequences or to invoke an Ex command or to invoke a Vim function or to invoke external commands. Using key maps you can define your own Vim commands.
+
+`:map {lhs} {rhs}` map the key sequence `{lhs}` to `{rhs}` for the modes where the map command applies. The result, including `{rhs}`, is then further scanned for mappings. This allows for nested and recursive use of mappings.
+
+For example, `:map <F2> i# Author:<CR># Date Created:<CR># Description:<CR># Date Modified:<CR><CR>`
+
+- `<BS>` backspace
+- `<CR>` enter
+- `<Enter>` enter
+- `<Return>` enter
+- `<Esc>` escape
+- `<Space>` space
+- `<Up>` up arrow
+- `<Down>` down arrow
+- `<Left>` left arrow
+- `<Right>` right arrow
+- `<Insert>` insert
+- `<Del>` delete
+- `<Home>` home
+- `<End>` end
+- `<PageUp>` page-up
+- `<PageDown>` page-down
+- `<Tab>` tab
+- `<bar>` `|`
+- `<C-X>` CTRL-X
+- `<F1>-<F12>` function keys
