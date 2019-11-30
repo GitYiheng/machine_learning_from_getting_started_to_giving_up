@@ -390,6 +390,10 @@ For example, `:map <F2> i# Author:<CR># Date Created:<CR># Description:<CR># Dat
 
 `:[N]bp[!] [+cmd] [N]` go to `[N]`th previous buffer list. `[N]` defaults to one. Wraps around the end of the buffer list.
 
+`:bf [+cmd]` go to first buffer in buffer list. If the buffer list is empty, go to the first unlisted buffer.
+
+`:bl[!] [+cmd]` go to last buffer in buffer list. If the buffer list is empty, go to the last unlisted buffer.
+
 `:bad [+lnum] {fname}` add file name `{fname}` to the buffer list, without loading it. If `lnum` is specified, the cursor will be positioned at that line when the buffer is first entered.
 
 `:bd[!] [N]` unload buffer `[N]` (default: current buffer) and delete it from the buffer list. If the buffer was changed, this fails, unless when `[!]` is specified, in which case changes are lost. The file remains unaffected. Any windows for this buffer are closed. If buffer `[N]` is the current buffer, another buffer will be displayed instead. This is the most recent entry in the jump list that points into a loaded buffer.
