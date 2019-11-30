@@ -344,4 +344,4 @@ Use visual mode to select target content and press `:` enters the command mode `
 - Unix/Linux/Mac: ~/.vimrc
 - Windows: $HOME/_vimrc
 - Each line is executed as a command
-
+  - `set ruler` = `:set ruler`
