@@ -63,9 +63,19 @@ You can also leave command mode by pressing Escape.
 
 `{` move to the start of the previous paragraph or block of text
 
-`ctrl+f` move down one page
+`CTRL+E` scroll the window down
 
-`ctrl+b` move back up one page
+`CTRL+Y` scroll the window up
+
+`CTRL+F` move down one page
+
+`CTRL+B` move back up one page
+
+`H` move cursor to the top of the window
+
+`M` move cursor to the middle of the window
+
+`L` move cursor to the bottom of the window
 
 `gg` go to the first line in the file
 
