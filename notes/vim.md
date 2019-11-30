@@ -299,6 +299,10 @@ Save macros in `vimrc` file:
 
 `let @{register} = 'keystrokes'`
 
+`m{a-zA-Z}` set mark `{a-zA-Z}` at cursor position (does not move the cursor, this is not a motion command).
+
+`'m{a-zA-Z}` jump to the mark `{a-zA-Z}` in the current buffer.
+
 # Visual Mode
 
 When editing text with Vim, visual mode can be extremely useful for identifying chunks of text to be manipulated.
