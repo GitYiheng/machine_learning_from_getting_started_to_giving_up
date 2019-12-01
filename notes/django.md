@@ -31,5 +31,26 @@ This tutorial is written for Django 2.2, which supports Python 3.5 and later.
 
 ### Creating a Project
 
-If this is your first time using Django, you’ll have to take care of some initial setup. Namely, you’ll need to auto-generate some code that establishes a Django project --- a collection of settings for an instance of Django, including database configuration, Django-specific options and application-specific settings.
+If this is your first time using Django, you’ll have to take care of some initial setup. Namely, you’ll need to auto-generate some code that establishes a Django project &mdash; a collection of settings for an instance of Django, including database configuration, Django-specific options and application-specific settings.
 
+From the command line, `cd` into a directory where you’d like to store your code, then run the following command:
+
+```
+django-admin startproject mysite
+```
+
+This will create a `mysite` directory in your current directory.
+
+Note: You’ll need to avoid naming projects after built-in Python or Django components. In particular, this means you should avoid using names like `django` (which will conflict with Django itself) or `test` (which conflicts with a built-in Python package).
+
+Let’s look at what `startproject` created:
+
+```
+mysite/
+├── manage.py
+└── mysite
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+```
