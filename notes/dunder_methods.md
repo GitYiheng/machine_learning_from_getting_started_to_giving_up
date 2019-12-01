@@ -114,3 +114,46 @@ Output:
 ```
 Hello Geeks
 ```
+
+## `__str__` vs `__repr__`
+
+`__repr__` goal is to be unambiguous
+
+`__str__` goal is to be readable
+
+```python
+class Sic(object): pass
+
+print(str(Sic()))
+print(repr(Sic()))
+```
+
+Output:
+
+```
+<__main__.Sic object at 0x7f11cce27410>
+<__main__.Sic object at 0x7f11cce27410>
+```
+
+```python
+class Sic(object):
+    def __repr__(object): return 'foo'
+
+print(str(Sic()))
+print(repr(Sic()))
+
+class Cis(object):
+    def __str__(object): return 'foo'
+
+print(str(Cis()))
+print(repr(Cis()))
+```
+
+Output:
+
+```
+foo
+foo
+foo
+<__main__.Cis object at 0x7f00f1941320>
+```
