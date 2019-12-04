@@ -19,3 +19,12 @@ ps aux | grep nginx
 - `a` shows processes for all users
 - `u` displays the process's user/owner
 - `x` also shows processes not attached to a terminal
+
+Check ip address
+
+```
+ifconfig
+```
+
+Go to that ip address in browser. If the Nginx page is displayed, it means the Nginx server is working and listening on http port 80.
+
