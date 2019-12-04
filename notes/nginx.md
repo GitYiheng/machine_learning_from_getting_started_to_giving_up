@@ -290,6 +290,3 @@ While server contexts are selected based on the requested IP address/port combin
 So, if a client requests `http://www.example.com/blog` on port 80, the `http`, `www.example.com`, and port 80 would all be used to determine which server block to select. After a server is selected, the `/blog` portion (the request URI), would be evaluated against the defined locations to determine which further context should be used to respond to the request.
 
 Many of the directives you are likely to see in a location context are also available at the parent levels. New directives at this level allow you to reach locations outside of the document root (`alias`), mark the location as only internally accessible (`internal`), and proxy to other servers or locations (using http, fastcgi, scgi, and uwsgi proxying).
-
-#### Other Contexts
-
