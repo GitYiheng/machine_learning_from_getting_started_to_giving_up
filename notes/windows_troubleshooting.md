@@ -1,4 +1,26 @@
-# Windows Troubleshooting
+# Windows Boot Process
+
+Windows 10 boot process on BIOS systems comprises of four major phases. It starts from POST and ends up in loading the Windows OS Loader or the Kernel. Here is the list of stages it goes through:
+
+1. PreBoot
+2. Windows Boot Manager
+3. Windows OS Loader.
+4. Windows NT OS Kernel.
+
+During every process, a program is loaded. Depending on whether it uses Legacy BIOS or UEFI, the file paths and files change.
+
+| Phase  | Boot Process | BIOS | UEFI |
+| ------------- | ------------- | ------------- | ------------- |
+| 1  | PreBoot | MBR/PBR (Bootstrap Code) | UEFI Firmware |
+| 2  | Windows Boot Manager | %SystemDrive%\bootmgr | \EFI\Microsoft\Boot\bootmgfw.efi |
+| 3  | Windows OS Loader | %SystemRoot%\system32\winload.exe | %SystemRoot%\system32\winload.efi |
+| 4  | Windows NT OS Kernel | %SystemRoot%\system32\ntoskrnl.exe | |
+
+# Abbreviations
+
+BIOS (Basic Input/Output System): BIOS checks the health of your computer's hardware and allows Windows to start. When you turn on your PC, its BIOS runs a POST to ensure that the machine's devices (hard drive, sound card, keyboard, and the like) are connected and working properly. If the test finds no problems, the BIOS turns over control of your PC to another piece of software, typically the "operating system".
+
+POST (Power-On Self-Test): POST is the diagnostic testing sequence that a computer's basic input/output system (or "starting program") runs to determine if the computer keyboard, random access memory, disk drives, and other hardware are working correctly.
 
 UEFI (Unified Extensible Firmware Interface): UEFI is a specification for a software program that connects a computer's firmware to its operating system (OS). UEFI is expected to eventually replace BIOS. Like BIOS, UEFI is installed at the time of manufacturing and is the first program that runs when a computer is turned on.
 
