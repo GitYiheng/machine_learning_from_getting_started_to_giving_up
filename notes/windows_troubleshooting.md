@@ -1,5 +1,9 @@
 # Windows Troubleshooting
 
+UEFI (Unified Extensible Firmware Interface): UEFI is a specification for a software program that connects a computer's firmware to its operating system (OS). UEFI is expected to eventually replace BIOS. Like BIOS, UEFI is installed at the time of manufacturing and is the first program that runs when a computer is turned on.
+
+EFI (Extensible Firmware Interface): A file with the EFI file extension is an Extensible Firmware Interface file. EFI files are boot loader executables, exist on UEFI (Unified Extensible Firmware Interface) based computer systems, and contain data on how the boot process should proceed.
+
 ## Troubleshooting Process and Tools
 
 - Gather
