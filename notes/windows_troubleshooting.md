@@ -37,6 +37,8 @@ GPT (GUID Partition Table): GPT is a new disk architecture that expands on the o
 
 GUID (Globally Unique Identifier): A GUID is a term used by Microsoft for a number that its programming generates to create a unique identity for an entity such as a Word document. GUIDs are widely used in Microsoft products to identify interfaces, replica sets, records, and other objects.
 
+WMIC (Windows Management Instrumentation Command): WMIC is a software utility that allows users to performs Windows Management Instrumentation (WMI) operations with a command prompt.
+
 ## Troubleshooting Process and Tools
 
 - Gather
