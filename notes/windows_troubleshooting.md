@@ -16,6 +16,13 @@ During every process, a program is loaded. Depending on whether it uses Legacy B
 | 3  | Windows OS Loader | `%SystemRoot%\system32\winload.exe` | `%SystemRoot%\system32\winload.efi` |
 | 4  | Windows NT OS Kernel | `%SystemRoot%\system32\ntoskrnl.exe` | |
 
+1. **PreBoot**: POST or Power-On Self-Test loads firmware settings. It checks for a valid disk system, and if the system is good to go for the next phase. If the computer has a valid MBR, i.e., Master Boot Record, the boot process moves further and loads Windows Boot Manager.
+2. **Windows Boot Manager**: This step determines if you have multiple OS installed on your computer. If yes, then it offers a menu with the names of the OSs. When you select the OS, it will load the right program, i.e., Winload.exe to boot you into the correct OS.
+3. **Windows OS Loader**: Like its name, WinLoad.exe loads important drivers to kick start the Windows Kernel. The kernel uses the drivers to talk to the hardware and do rest of the things required for the boot process to continue.
+4. **Windows NT OS Kernel**: This is the last stage which picks up the Registry settings, additional drivers, etc. Once that has been read, the control is taken by the system manager process. It loads up the UI, the rest of the hardware and software. That’s when you finally get to see your Windows 10 Login screen.
+
+When you run Windows 10 on a computer that supports Unified Extensible Firmware Interface (UEFI), Trusted Boot protects your computer from the moment you power it on. When the computer starts, it first finds the operating system bootloader. Computers without Secured Boot simply run whatever bootloader is on the PC’s hard drive. When a computer equipped with UEFI starts, it first verifies that the firmware is digitally signed. If Secure Boot is enabled, the firmware examines the bootloader’s digital signature to verify that it is intact hasn’t been modified.
+
 # Abbreviations
 
 BIOS (Basic Input/Output System): BIOS checks the health of your computer's hardware and allows Windows to start. When you turn on your PC, its BIOS runs a POST to ensure that the machine's devices (hard drive, sound card, keyboard, and the like) are connected and working properly. If the test finds no problems, the BIOS turns over control of your PC to another piece of software, typically the "operating system".
