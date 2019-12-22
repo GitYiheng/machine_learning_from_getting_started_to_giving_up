@@ -8,4 +8,4 @@
 - Document
 - Tools
 
-- Using the Task Manager, Resource Monitor, and Performance Monitor
+Using the Task Manager, Resource Monitor, and Performance Monitor
