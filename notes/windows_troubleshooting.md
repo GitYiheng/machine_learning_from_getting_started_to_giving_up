@@ -33,6 +33,10 @@ UEFI (Unified Extensible Firmware Interface): UEFI is a specification for a soft
 
 EFI (Extensible Firmware Interface): A file with the EFI file extension is an Extensible Firmware Interface file. EFI files are boot loader executables, exist on UEFI (Unified Extensible Firmware Interface) based computer systems, and contain data on how the boot process should proceed.
 
+GPT (GUID Partition Table): GPT is a new disk architecture that expands on the older Master Boot Record (MBR) partitioning scheme that has been common to Intel-based computers. A partition is a contiguous space of storage on a physical or logical disk that functions as though it were a physically separate disk.
+
+GUID (Globally Unique Identifier): A GUID is a term used by Microsoft for a number that its programming generates to create a unique identity for an entity such as a Word document. GUIDs are widely used in Microsoft products to identify interfaces, replica sets, records, and other objects.
+
 ## Troubleshooting Process and Tools
 
 - Gather
