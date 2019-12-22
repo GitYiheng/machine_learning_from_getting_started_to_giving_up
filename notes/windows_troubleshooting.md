@@ -12,9 +12,9 @@ During every process, a program is loaded. Depending on whether it uses Legacy B
 | Phase  | Boot Process | BIOS | UEFI |
 | ------------- | ------------- | ------------- | ------------- |
 | 1  | PreBoot | MBR/PBR (Bootstrap Code) | UEFI Firmware |
-| 2  | Windows Boot Manager | %SystemDrive%\bootmgr | \EFI\Microsoft\Boot\bootmgfw.efi |
-| 3  | Windows OS Loader | %SystemRoot%\system32\winload.exe | %SystemRoot%\system32\winload.efi |
-| 4  | Windows NT OS Kernel | %SystemRoot%\system32\ntoskrnl.exe | |
+| 2  | Windows Boot Manager | `%SystemDrive%\bootmgr` | `\EFI\Microsoft\Boot\bootmgfw.efi` |
+| 3  | Windows OS Loader | `%SystemRoot%\system32\winload.exe` | `%SystemRoot%\system32\winload.efi` |
+| 4  | Windows NT OS Kernel | `%SystemRoot%\system32\ntoskrnl.exe` | |
 
 # Abbreviations
 
