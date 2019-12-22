@@ -9,3 +9,5 @@
 - Tools
 
 Using the Task Manager, Resource Monitor, and Performance Monitor
+
+Using Reliability History, Event Viewer, and Steps Recorder.
