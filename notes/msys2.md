@@ -24,6 +24,12 @@ pacman -Ss <name or part of the name of the package>
 pacman -S <name of the package>
 ```
 
+## Update Packages
+
+```
+pacman -Syuu
+```
+
 ## Uninstall a Package
 
 ```
