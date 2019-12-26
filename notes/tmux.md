@@ -85,6 +85,11 @@ Below are some most common commands for managing Tmux windows and panes:
 - `CTRL+B` then `;` toggle between the current and previous pane
 - `CTRL+B` then `x` close the current pane
 
+## Resizing Panes
+
+- `CTRL-B` then `:`, followed by `resize-pane -direction number_of_cells`
+  - e.g. `resize-pane -U 10`, `resize-pane -D 20`, `resize-pane -L 30`, `resize-pane -R 40`
+
 ## Customizing tmux
 
 When tmux is started, it reads its configuration parameters from `~/.tmux.conf` if the file is present.
