@@ -85,6 +85,8 @@ Below are some most common commands for managing Tmux windows and panes:
 - `CTRL+B` then `;` toggle between the current and previous pane
 - `CTRL+B` then `x` close the current pane
 
+- `CTRL+B` then `arrow-key` go to another pane
+
 ## Resizing Panes
 
 - `CTRL-B` then `:`, followed by `resize-pane -direction number_of_cells`
