@@ -9,7 +9,7 @@
 
 #### Income Statement (all numbers in thousands)
 
-| Breakdown | TTM | 29/09/2018 | 29/09/2017 | 29/09/2016  |
+| Breakdown                                   | TTM         | 29/09/2018  | 29/09/2017  | 29/09/2016  |
 |---------------------------------------------|-------------|-------------|-------------|-------------|
 | Total revenue                               | 260,174,000 | 265,595,000 | 229,234,000 | 215,639,000 |
 | Cost of revenue                             | 161,782,000 | 163,756,000 | 141,048,000 | 131,376,000 |
@@ -38,7 +38,7 @@
 
 The revenue growth rate shows how much the revenue has grown by for each period in an income statement.
 
-| Breakdown | TTM | 29/09/2018 | 29/09/2017 | 29/09/2016  |
+| Breakdown                                   | TTM         | 29/09/2018  | 29/09/2017  | 29/09/2016  |
 |---------------------------------------------|-------------|-------------|-------------|-------------|
 | Total revenue                               | 260,174,000 | 265,595,000 | 229,234,000 | 215,639,000 |
 
@@ -51,6 +51,12 @@ The revenue growth rate shows how much the revenue has grown by for each period 
 Revenue growth rate of 2018:
 
 (265,595,000 - 229,234,000) / 229,234,000 = 15.86%
+
+Revenue growth rate of 2017:
+
+(229,234,000 - 215,639,000) / 215,639,000 = 6.30%
+
+We can tell that the company is growing but at a slower rate.
 
 ## Gross Profit Margin
 
