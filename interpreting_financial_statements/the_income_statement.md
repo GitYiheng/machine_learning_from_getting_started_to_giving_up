@@ -60,9 +60,17 @@ We can tell that the company is growing but at a slower rate.
 
 ## Gross Profit Margin
 
+gross profit = total revenue - cost of revenue
+
 The gross profit margin shows how much of the revenue is retained after the costs of goods sold.
 
-Calculation:
+| Breakdown                                   | TTM         | 29/09/2018  | 29/09/2017  | 29/09/2016  |
+|---------------------------------------------|-------------|-------------|-------------|-------------|
+| Total revenue                               | 260,174,000 | 265,595,000 | 229,234,000 | 215,639,000 |
+| Cost of revenue                             | 161,782,000 | 163,756,000 | 141,048,000 | 131,376,000 |
+| Gross profit                                | 98,392,000  | 101,839,000 | 88,186,000  | 84,263,000  |
+
+#### Calculation:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\frac{\text{gross&space;profit}}{\text{revenue}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{\text{gross&space;profit}}{\text{revenue}}" title="\frac{\text{gross profit}}{\text{revenue}}" /></a>
 
