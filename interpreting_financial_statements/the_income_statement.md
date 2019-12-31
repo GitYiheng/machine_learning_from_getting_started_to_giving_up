@@ -7,6 +7,8 @@
 3. Go to `financials`
 4. Copy and paste the income statement into a spreadsheet (10-Q for quarterly)
 
+#### Income Statement (all numbers in thousands)
+
 | Breakdown | TTM | 29/09/2018 | 29/09/2017 | 29/09/2016  |
 |---------------------------------------------|-------------|-------------|-------------|-------------|
 | Total revenue                               | 260,174,000 | 265,595,000 | 229,234,000 | 215,639,000 |
