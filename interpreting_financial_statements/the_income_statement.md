@@ -48,7 +48,7 @@ The revenue growth rate shows how much the revenue has grown by for each period 
 
 #### Example
 
-Revenue growth rate of 2018 is
+Revenue growth rate of 2018:
 
 (265,595,000 - 229,234,000) / 229,234,000 = 15.86%
 
