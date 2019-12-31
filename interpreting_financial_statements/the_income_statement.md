@@ -38,9 +38,19 @@
 
 The revenue growth rate shows how much the revenue has grown by for each period in an income statement.
 
-Calculation:
+| Breakdown | TTM | 29/09/2018 | 29/09/2017 | 29/09/2016  |
+|---------------------------------------------|-------------|-------------|-------------|-------------|
+| Total revenue                               | 260,174,000 | 265,595,000 | 229,234,000 | 215,639,000 |
+
+#### Calculation:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\frac{\text{current&space;period&space;revenue}&space;-&space;\text{prior&space;period&space;revenue}}{\text{prior&space;period&space;revenue}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{\text{current&space;period&space;revenue}&space;-&space;\text{prior&space;period&space;revenue}}{\text{prior&space;period&space;revenue}}" title="\frac{\text{current period revenue} - \text{prior period revenue}}{\text{prior period revenue}}" /></a>
+
+#### Example
+
+Revenue growth rate of 2018 is
+
+(265,595,000 - 229,234,000) / 229,234,000 = 15.86%
 
 ## Gross Profit Margin
 
